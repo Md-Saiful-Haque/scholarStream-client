@@ -1,0 +1,25 @@
+import React from 'react';
+import { useNavigate } from 'react-router';
+
+// You will need react-router-dom for navigation
+
+const SearchScholarshipButton = () => {
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    // Navigate to the All Scholarships page as required
+    navigate('/all-scholarships'); 
+  };
+
+  return (
+    <button
+      onClick={handleSearch}
+      className="btn btn-warning text-white text-lg font-semibold px-8 py-3 rounded-lg shadow-xl hover:scale-105 transition-transform duration-300 ease-in-out"
+      // DaisyUI classes used: 'btn-warning' (yellow-ish color), 'btn'
+    >
+      Search Scholarship
+    </button>
+  );
+};
+
+export default SearchScholarshipButton;
