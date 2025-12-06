@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { FaEye } from 'react-icons/fa';
 import { IoEyeOff } from 'react-icons/io5';
 import useAuth from '../hooks/useAuth';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const Register = () => {
     const [show, setShow] = useState(false);
@@ -12,6 +13,7 @@ const Register = () => {
     const [error, setError] = useState('')
     const navigate = useNavigate()
     const location = useLocation()
+    const axiosSecure = useAxiosSecure()
 
     const handleSignUp = (e) => {
         e.preventDefault();
@@ -24,7 +26,7 @@ const Register = () => {
         //const lowercase = /[a-z]/;
         const regEx = /(?=.*[A-Z])(?=.*[!@#$&*])/
 
-        if(!regEx.test(password)) {
+        if (!regEx.test(password)) {
             setError('Must include 1 uppercase letter and 1 special character (!@#$&*)')
             return
         }
@@ -34,14 +36,28 @@ const Register = () => {
         //     return
         // }
 
-        if(password.length < 6) {
+        if (password.length < 6) {
             setError('Password must be 6 characters')
             return
         }
 
-            createUser(email, password)
+        createUser(email, password)
+            .then(res => {
+
+                const userInfo = {
+                    name: displayName,
+                    email: email,
+                    photoURL: photoURL
+                };
+
+                axiosSecure.post('/users', userInfo)
                 .then(res => {
-                    updateUser({ displayName, photoURL })
+                    if (res.data.insertedId) {
+                        console.log('user created in the database');
+                    }
+                });
+
+                updateUser({ displayName, photoURL })
                     .then(() => {
                         setUser({ ...res.user, displayName, photoURL })
                         toast.success('Register Successfully')
@@ -50,17 +66,30 @@ const Register = () => {
                     .catch(err => {
                         toast(err.message)
                     })
-                    navigate(`${location.state ? location.state : '/'}`)
-                })
-                .catch(error => {
-                    toast.error(error.message)
-                })
+                navigate(`${location.state ? location.state : '/'}`)
+            })
+            .catch(error => {
+                toast.error(error.message)
+            })
 
     }
 
     const handleGoogleSignIn = () => {
         signWithGoogle()
             .then(res => {
+
+                const userInfo = {
+                    name: res.user.displayName,
+                    email: res.user.email,                 
+                    photoURL: res.user.photoURL
+                }
+
+                axiosSecure.post('/users', userInfo)
+                    .then(res => {
+                        console.log('user data has been stored', res.data)
+                        navigate(location.state || '/');
+                    })
+
                 setUser(res.user)
                 toast.success('Register Successfully')
                 setLoading(false)
