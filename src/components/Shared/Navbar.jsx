@@ -20,8 +20,8 @@ const Navbar = () => {
     }
 
     const links = <>
-        <li><NavLink>Home</NavLink></li>
-        <li><NavLink>All Scholarships</NavLink></li>
+        <li className='text-lg'><NavLink>Home</NavLink></li>
+        <li className='text-lg'><NavLink>All Scholarships</NavLink></li>
     </>
     return (
         <div className='bg-[#324354]'>
@@ -39,8 +39,8 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className='flex items-center gap-1'>
-                <img className='w-20 h-20' src={logo} alt="" />
-                <h2 className='text-[#c4e5f2] font-bold text-2xl'>ScholarStream</h2>
+                <Link to={'/'}><img className='w-20 h-20' src={logo} alt="" /></Link>
+                <Link to={'/'}><h2 className='text-[#c4e5f2] font-bold text-2xl'>ScholarStream</h2></Link>
                 </div>
             </div>
             <div className="navbar-center hidden lg:flex">
@@ -49,9 +49,9 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end flex gap-4">
-                {user ? <Link onClick={handleSignOut}><button className='bg-[#04264e] text-white px-5 py-2 rounded-md'>Logout</button></Link> : <>
-                <Link><button className='bg-[#04264e] text-white px-5 py-2 rounded-md'>Login</button></Link>
-                <Link><button className='bg-[#04264e] text-white px-5 py-2 rounded-md'>Register</button></Link>
+                {user ? <Link onClick={handleSignOut}><button className='bg-[#04264e] text-white text-lg px-5 py-2 rounded-md'>Logout</button></Link> : <>
+                <Link to={'/auth/login'}><button className='bg-[#04264e] text-white text-lg px-5 py-2 rounded-md'>Login</button></Link>
+                <Link to={'/auth/register'}><button className='bg-[#04264e] text-white text-lg px-5 py-2 rounded-md'>Register</button></Link>
                 </> }
             </div>
         </div>
