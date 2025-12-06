@@ -6,8 +6,8 @@ import logo from '../../assets/logo.png'
 
 const Navbar = () => {
     const links = <>
-        <li className='text-white'><NavLink>Home</NavLink></li>
-        <li className='text-white'><NavLink>All Scholarships</NavLink></li>
+        <li><NavLink>Home</NavLink></li>
+        <li><NavLink>All Scholarships</NavLink></li>
     </>
     return (
         <div className='bg-[#324354]'>
@@ -30,7 +30,7 @@ const Navbar = () => {
                 </div>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
+                <ul className="menu menu-horizontal px-1 text-white">
                     {links}
                 </ul>
             </div>
