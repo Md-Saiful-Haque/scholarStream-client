@@ -14,8 +14,7 @@ const SearchScholarshipButton = () => {
   return (
     <button
       onClick={handleSearch}
-      className="btn btn-warning text-white text-lg font-semibold px-8 py-3 rounded-lg shadow-xl hover:scale-105 transition-transform duration-300 ease-in-out"
-      // DaisyUI classes used: 'btn-warning' (yellow-ish color), 'btn'
+      className="bg-[#04264e] text-white text-lg font-semibold px-8 py-3 rounded-lg shadow-xl hover:scale-105 transition-transform duration-300 ease-in-out"
     >
       Search Scholarship
     </button>

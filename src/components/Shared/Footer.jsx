@@ -16,7 +16,7 @@ const Footer = () => {
                 <div className='md:w-1/3'>
                     <div className='flex items-center'>
                         <img src={logo} alt="" className='w-20 h-20' />
-                        <h2 className='text-xl font-bold text-white'>ScholarStream</h2>
+                        <h2 className='text-2xl font-bold text-[#c4e5f2]'>ScholarStream</h2>
                     </div>
                     <p className='mb-8 text-[#b3c5b5]'>To simplify the complex process of finding financial aid for education. A centralized platform helps students discover opportunities they might miss and streamlines the application review process for administrators.</p>
                     <hr className="separator" />

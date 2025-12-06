@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
-//import { AuthContext } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { FaEye } from 'react-icons/fa';
 import { IoEyeOff } from 'react-icons/io5';
+import useAuth from '../hooks/useAuth';
 
 
 const Login = () => {
     const [show, setShow] = useState(false);
-    //const {signIn, setUser, setLoading, loading, signWithGoogle} = use(AuthContext)
+    const {signIn, setUser, setLoading, signWithGoogle} = useAuth()
     const navigate = useNavigate()
     const location = useLocation()
 
@@ -47,7 +47,7 @@ const Login = () => {
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-[#c4e5f2] py-12 px-3 md:px-0">
-            <title>krishiLink-Login</title>
+            <title>scholarStream-Login</title>
             {/* Form Card Container */}
             <div className="w-full max-w-md bg-white rounded-3xl p-8 shadow-2xl">
                 <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">

@@ -4,6 +4,7 @@ import Home from "../Pages/Home";
 import AllScholarships from "../Pages/AllScholarships";
 import AuthLayouts from "../Layouts/AuthLayouts";
 import Login from "../Pages/Login";
+import Register from "../Pages/Register";
 
 
 export const router = createBrowserRouter([
@@ -28,6 +29,10 @@ export const router = createBrowserRouter([
             {
                 path: '/auth/login',
                 element: <Login />
+            },
+            {
+                path: '/auth/register',
+                element: <Register />
             }
         ]
     }

@@ -2,9 +2,23 @@ import React from 'react';
 import { Link, NavLink } from 'react-router';
 import Container from '../Container';
 import logo from '../../assets/logo.png'
+import useAuth from '../../hooks/useAuth';
+import { toast } from 'react-toastify';
 
 
 const Navbar = () => {
+    const {user, logOut} = useAuth()
+
+    const handleSignOut = () => {
+        logOut()
+            .then(() => {
+                toast.success('Logged Out')
+            })
+            .catch(err => {
+                toast.error(err.message)
+            })
+    }
+
     const links = <>
         <li><NavLink>Home</NavLink></li>
         <li><NavLink>All Scholarships</NavLink></li>
@@ -24,9 +38,9 @@ const Navbar = () => {
                         {links}
                     </ul>
                 </div>
-                <div className='flex items-center gap-2'>
+                <div className='flex items-center gap-1'>
                 <img className='w-20 h-20' src={logo} alt="" />
-                <h2 className='text-white font-bold text-2xl'>ScholarStream</h2>
+                <h2 className='text-[#c4e5f2] font-bold text-2xl'>ScholarStream</h2>
                 </div>
             </div>
             <div className="navbar-center hidden lg:flex">
@@ -35,8 +49,10 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end flex gap-4">
+                {user ? <Link onClick={handleSignOut}><button className='bg-[#04264e] text-white px-5 py-2 rounded-md'>Logout</button></Link> : <>
                 <Link><button className='bg-[#04264e] text-white px-5 py-2 rounded-md'>Login</button></Link>
                 <Link><button className='bg-[#04264e] text-white px-5 py-2 rounded-md'>Register</button></Link>
+                </> }
             </div>
         </div>
         </Container>
