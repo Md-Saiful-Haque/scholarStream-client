@@ -11,6 +11,10 @@ import Profile from "../Pages/Dashboard/Common/Profile";
 import AddScholarship from "../Pages/Dashboard/Admin/AddScholarship";
 import ManageScholarships from "../Pages/Dashboard/Admin/ManageScholarships";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
+import ManageApplications from "../Pages/Dashboard/Modarator/ManageApplications";
+import AllReviews from "../Pages/Dashboard/Modarator/AllReviews";
+import MyReview from "../Pages/Dashboard/Student/MyReview";
+import MyApplications from "../Pages/Dashboard/Student/MyApplications";
 
 
 
@@ -79,6 +83,30 @@ export const router = createBrowserRouter([
                     </PrivateRoute>
                 ),
             },
+            {
+                path: 'manage-application',
+                element: <PrivateRoute>
+                    <ManageApplications></ManageApplications>
+                </PrivateRoute>
+            },
+            {
+                path: 'all-reviews',
+                element: <PrivateRoute>
+                    <AllReviews />
+                </PrivateRoute>
+            },
+            {
+                path: 'my-reviews',
+                element: <PrivateRoute>
+                    <MyReview />
+                </PrivateRoute>
+            },
+            {
+                path: 'my-applications',
+                element: <PrivateRoute>
+                    <MyApplications />
+                </PrivateRoute>
+            }
         ]
     }
 ])

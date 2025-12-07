@@ -1,50 +1,36 @@
-import { useEffect, useState } from 'react'
-import DeleteModal from '../../Modal/DeleteModal'
-import useAxiosSecure from '../../../hooks/useAxiosSecure'
-const SellerOrderDataRow = ({ order }) => {
-  const axiosSecure = useAxiosSecure()
-  let [isOpen, setIsOpen] = useState(false)
-  const closeModal = () => setIsOpen(false)
+//import { useEffect, useState } from 'react'
 
 
-  const { name, price, quantity, status, customer } = order
-  const [statusUpdate, setStatusUpdate] = useState(status)
-
-  // const handleStatusUpdate = async (status) => {
-  //   const res = await axiosSecure.put(`/orders-update/${order._id}`, { status })
-  //   return res.data
-  // }
-
-  useEffect(() => {
-      axiosSecure.patch(`/orders-update/${order._id}`, { statusUpdate })
-  }, [statusUpdate, axiosSecure, order._id])
+const ManageApplicationsDataRow = () => {
+  // const axiosSecure = useAxiosSecure()
+  // let [isOpen, setIsOpen] = useState(false)
+  // const closeModal = () => setIsOpen(false
 
   return (
     <tr>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 '>{name}</p>
+        <p className='text-gray-900 '>gvtwev</p>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 '>{customer}</p>
+        <p className='text-gray-900 '>fdgvs</p>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 '>${price}</p>
+        <p className='text-gray-900 '>$bgsv</p>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 '>{quantity}</p>
+        <p className='text-gray-900 '>fvjgvrtw</p>
       </td>
       {/* <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
         <p className='text-gray-900 '>Dhaka</p>
       </td> */}
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 '>{statusUpdate}</p>
+        <p className='text-gray-900 '>ljgdd</p>
       </td>
 
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
         <div className='flex items-center gap-2'>
           <select
-            value={statusUpdate}
-            onChange={(e) => setStatusUpdate(e.target.value)}
+            //value={statusUpdate}
             required
             className='p-1 border-2 border-lime-300 focus:outline-lime-500 rounded-md text-gray-900  bg-white'
             name='category'
@@ -54,7 +40,7 @@ const SellerOrderDataRow = ({ order }) => {
             <option value='Delivered'>Deliver</option>
           </select>
           <button
-            onClick={() => setIsOpen(true)}
+            //onClick={() => setIsOpen(true)}
             className='relative disabled:cursor-not-allowed cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight'
           >
             <span
@@ -64,10 +50,10 @@ const SellerOrderDataRow = ({ order }) => {
             <span className='relative'>Cancel</span>
           </button>
         </div>
-        <DeleteModal isOpen={isOpen} closeModal={closeModal} />
+        {/* <DeleteModal isOpen={isOpen} closeModal={closeModal} /> */}
       </td>
     </tr>
   )
 }
 
-export default SellerOrderDataRow
+export default ManageApplicationsDataRow

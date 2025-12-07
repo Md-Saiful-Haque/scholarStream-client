@@ -1,20 +1,21 @@
-import { useQuery } from '@tanstack/react-query'
-import PlantDataRow from '../../../components/Dashboard/TableRows/PlantDataRow'
-import useAuth from '../../../hooks/useAuth'
-import useAxiosSecure from '../../../hooks/useAxiosSecure'
+//import { useQuery } from '@tanstack/react-query'
 
-const MyInventory = () => {
-  const axiosSecure = useAxiosSecure()
+import ManageApplicationsDataRow from "../../../components/Dashboard/TableRows/ManageApplicationsDataRow"
 
-  const { user } = useAuth()
+//import useAuth from '../../../hooks/useAuth'
+//import useAxiosSecure from '../../../hooks/useAxiosSecure'
 
-  const { data: plants = [] } = useQuery({
-    queryKey: ['plants', user?.email],
-    queryFn: async () => {
-      const res = await axiosSecure(`/my-inventory/${user.email}`)
-      return res.data
-    }
-  })
+const ManageApplications = () => {
+  // const { user } = useAuth()
+  // const axiosSecure = useAxiosSecure()
+
+  // const { data: orders = [] } = useQuery({
+  //   queryKey: ['orders', user?.email],
+  //   queryFn: async () => {
+  //     const res = await axiosSecure(`/manage-orders/${user.email}`)
+  //     return res.data
+  //   }
+  // })
 
   return (
     <>
@@ -29,19 +30,13 @@ const MyInventory = () => {
                       scope='col'
                       className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
                     >
-                      Image
-                    </th>
-                    <th
-                      scope='col'
-                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
-                    >
                       Name
                     </th>
                     <th
                       scope='col'
                       className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
                     >
-                      Category
+                      Customer
                     </th>
                     <th
                       scope='col'
@@ -55,25 +50,29 @@ const MyInventory = () => {
                     >
                       Quantity
                     </th>
+                    {/* <th
+                      scope='col'
+                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                    >
+                      Address
+                    </th> */}
+                    <th
+                      scope='col'
+                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                    >
+                      Status
+                    </th>
 
                     <th
                       scope='col'
                       className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
                     >
-                      Delete
-                    </th>
-                    <th
-                      scope='col'
-                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
-                    >
-                      Update
+                      Action
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {
-                    plants.map(plant => <PlantDataRow key={plant._id} plant={plant} />)
-                  } 
+                 <ManageApplicationsDataRow />
                 </tbody>
               </table>
             </div>
@@ -84,4 +83,4 @@ const MyInventory = () => {
   )
 }
 
-export default MyInventory
+export default ManageApplications
