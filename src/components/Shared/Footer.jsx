@@ -54,7 +54,7 @@ const Footer = () => {
                     <h2 className='text-2xl text-white font-semibold'>Newletter</h2>
                     <p className='mt-4 text-[#b3c5b5]'>Sign up now to get daily latest news & updates from us</p>
                     <div className='mt-8 relative'>
-                        <input type="email" name="" id="" placeholder='Your Email' className='bg-[#263c28] py-5 pl-4 pr-14 text-[#b3c5b5] outline-none border-none rounded-full' />
+                        <input type="email" name="" id="" placeholder='Your Email' className='bg-[#c4e5f2] py-5 pl-4 pr-14 text-[#04264e] outline-none border-none rounded-full' />
                         <div className='absolute top-1 left-50'>
                             <button className='bg-[#04264e] text-white rounded-full p-4'>
                                 Go

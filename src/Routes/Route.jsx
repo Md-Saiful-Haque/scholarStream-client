@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import MainLayouts from "../Layouts/MainLayouts";
 import Home from "../Pages/Home";
-import AllScholarships from "../Pages/AllScholarships";
 import AuthLayouts from "../Layouts/AuthLayouts";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
@@ -15,6 +14,8 @@ import AllReviews from "../Pages/Dashboard/Modarator/AllReviews";
 import MyReview from "../Pages/Dashboard/Student/MyReview";
 import MyApplications from "../Pages/Dashboard/Student/MyApplications";
 import AddScholarship from "../Pages/Dashboard/Admin/AddScholarship"
+import AllScholarship from "../Pages/AllScholarship";
+import ScholarshipDetails from "../Pages/ScholarshipDetails";
 
 
 
@@ -31,7 +32,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/all-scholarships',
-                element: <AllScholarships />
+                element: <AllScholarship />
+            },
+            {
+                path: '/scholarship/:id',
+                element: <ScholarshipDetails />
             }
         ]
     },
