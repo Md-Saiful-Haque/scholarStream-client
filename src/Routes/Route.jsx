@@ -8,13 +8,13 @@ import Register from "../Pages/Register";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import PrivateRoute from "./PrivateRoute";
 import Profile from "../Pages/Dashboard/Common/Profile";
-import AddScholarship from "../Pages/Dashboard/Admin/AddScholarship";
 import ManageScholarships from "../Pages/Dashboard/Admin/ManageScholarships";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
 import ManageApplications from "../Pages/Dashboard/Modarator/ManageApplications";
 import AllReviews from "../Pages/Dashboard/Modarator/AllReviews";
 import MyReview from "../Pages/Dashboard/Student/MyReview";
 import MyApplications from "../Pages/Dashboard/Student/MyApplications";
+import AddScholarship from "../Pages/Dashboard/Admin/AddScholarship"
 
 
 

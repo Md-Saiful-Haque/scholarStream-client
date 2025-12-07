@@ -1,5 +1,4 @@
-
-import CustomerOrderDataRow from '../../../components/Dashboard/TableRows/CustomerOrderDataRow'
+import ManageScholarshipDataRow from "../../../components/Dashboard/TableRows/ManageScholarshipDataRow"
 
 
 const ManageScholarships = () => {
@@ -59,7 +58,7 @@ const ManageScholarships = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <CustomerOrderDataRow  /> 
+                  <ManageScholarshipDataRow /> 
                 </tbody>
               </table>
             </div>

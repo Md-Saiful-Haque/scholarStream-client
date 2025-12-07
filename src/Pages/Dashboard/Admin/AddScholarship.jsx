@@ -1,267 +1,239 @@
 import React from 'react';
+import useAuth from '../../../hooks/useAuth';
+import { useForm } from 'react-hook-form';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const AddScholarship = () => {
-  return (
-    <div class="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
-    <div class="max-w-6xl mx-auto bg-white p-8 rounded-xl shadow-2xl">
-        <h2 class="text-3xl font-extrabold text-indigo-800 mb-8 border-b-4 border-indigo-100 pb-3">
-            📚 Add Scholarship: A form to create new scholarships
-        </h2>
+    const { user } = useAuth()
+    const axiosSecure = useAxiosSecure()
 
-        <form class="space-y-8">
+    const { register, handleSubmit, reset } = useForm()
 
-            <div class="border-b border-gray-200 pb-6">
-                <h3 class="text-xl font-semibold text-gray-900 mb-4">General Details</h3>
-                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                    
-                    <div>
-                        <label for="scholarshipName" class="block text-sm font-medium text-gray-700">
-                            Scholarship Name <span class="text-red-500">*</span>
-                        </label>
-                        <input
-                            type="text"
-                            name="scholarshipName"
-                            id="scholarshipName"
-                            required
-                            placeholder="e.g., Global Merit Award 2026"
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        />
+    const handleAddScholarship = (data) => {
+
+        axiosSecure.post('/add-scholarship', data)
+            .then(res => {
+                if (res.data.insertedId) {
+                    reset()
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Scholarship added successfully",
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+                }
+            })
+
+    }
+
+    return (
+        <div className="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
+            <div className="max-w-6xl mx-auto bg-white p-8 rounded-xl shadow-2xl">
+                <h2 className="text-3xl font-extrabold text-[#324354] mb-8 border-b-4 border-indigo-100 pb-3">
+                    📚 Add Scholarship: A form to create new scholarships
+                </h2>
+
+                <form onSubmit={handleSubmit(handleAddScholarship)} className="space-y-8">
+
+                    {/* ================= General Details ================= */}
+                    <div className="border-b border-gray-200 pb-6">
+                        <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                            General Details
+                        </h3>
+
+                        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">
+                                    Scholarship Name <span className="text-red-500">*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    {...register("scholarshipName")}
+                                    required
+                                    placeholder="e.g., Global Merit Award 2026"
+                                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">
+                                    University Name <span className="text-red-500">*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    {...register("universityName")}
+                                    required
+                                    placeholder="e.g., State University of Technology"
+                                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">
+                                    Image (URL)
+                                </label>
+                                <input
+                                    type="url"
+                                    {...register("image")}
+                                    placeholder="https://example.com/logo.png"
+                                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">
+                                    User Email <span className="text-red-500">*</span>
+                                </label>
+                                <input
+                                    defaultValue={user?.email}
+                                    type="email"
+                                    {...register("userEmail")}
+                                    required
+                                    placeholder="admin@organization.com"
+                                    className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Description */}
+                        <div className="space-y-1 mt-4">
+                            <label className="block text-sm font-medium text-gray-700">
+                                Description
+                            </label>
+                            <textarea
+                                {...register("description")}
+                                placeholder="Write scholarship description here..."
+                                className="block w-full h-32 px-4 py-3 border border-gray-300 rounded-md"
+                            />
+                        </div>
                     </div>
 
-                    <div>
-                        <label for="universityName" class="block text-sm font-medium text-gray-700">
-                            University Name <span class="text-red-500">*</span>
-                        </label>
-                        <input
-                            type="text"
-                            name="universityName"
-                            id="universityName"
-                            required
-                            placeholder="e.g., State University of Technology"
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        />
+                    {/* ================= Academic & Location ================= */}
+                    <div className="border-b border-gray-200 pb-6">
+                        <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                            Academic & Location
+                        </h3>
+
+                        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+                            <input
+                                placeholder="Country"
+                                {...register("country")}
+                                required
+                                className="input"
+                            />
+                            <input
+                                placeholder="City"
+                                {...register("city")}
+                                required
+                                className="input"
+                            />
+                            <input
+                                type="number"
+                                placeholder="World Rank"
+                                {...register("worldRank")}
+                                className="input"
+                            />
+                        </div>
+
+                        <div className="grid grid-cols-1 gap-6 mt-6 md:grid-cols-3">
+                            <select {...register("subjectCategory")} required className="input">
+                                <option value="">Select Category</option>
+                                <option value="Engineering">Engineering</option>
+                                <option value="Arts">Arts & Humanities</option>
+                                <option value="Science">Natural Sciences</option>
+                            </select>
+
+                            <select {...register("scholarshipCategory")} required className="input">
+                                <option value="">Select Type</option>
+                                <option value="Partial">Partial Funding</option>
+                                <option value="Full">Fully Funded</option>
+                                <option value="Research">Research Grant</option>
+                            </select>
+
+                            <select {...register("degree")} required className="input">
+                                <option value="">Select Degree</option>
+                                <option value="Bachelor">Bachelor's</option>
+                                <option value="Master">Master's</option>
+                                <option value="PhD">PhD</option>
+                            </select>
+                        </div>
                     </div>
 
-                    <div>
-                        <label for="image" class="block text-sm font-medium text-gray-700">
-                            Image (URL)
-                        </label>
-                        <input
-                            type="url"
-                            name="image"
-                            id="image"
-                            placeholder="e.g., https://example.com/logo.png"
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        />
+                    {/* ================= Financials ================= */}
+                    <div className="border-b border-gray-200 pb-6">
+                        <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                            Financials & Deadlines
+                        </h3>
+
+                        <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
+                            <input
+                                type="number"
+                                placeholder="Tuition Fees (Optional)"
+                                {...register("tuitionFees")}
+                                className="input"
+                            />
+
+                            <input
+                                type="number"
+                                placeholder="Application Fees"
+                                {...register("applicationFees")}
+                                required
+                                className="input"
+                            />
+
+                            <input
+                                type="number"
+                                placeholder="Service Charge"
+                                {...register("serviceCharge")}
+                                required
+                                className="input"
+                            />
+                        </div>
+
+                        <div className="grid grid-cols-1 gap-6 mt-6 md:grid-cols-2">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">
+                                    Deadline <span className="text-red-500">*</span>
+                                </label>
+
+                                <input
+                                    type="date"
+                                    {...register("deadline")}
+                                    required
+                                    className="input mt-2"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">
+                                    Post Date <span className="text-red-500">*</span>
+                                </label>
+
+                                <input
+                                    type="date"
+                                    {...register("postDate")}
+                                    className="input bg-gray-100 mt-2"
+                                />
+                            </div>
+                        </div>
                     </div>
 
-                    <div>
-                        <label for="userEmail" class="block text-sm font-medium text-gray-700">
-                            User Email <span class="text-red-500">*</span>
-                        </label>
-                        <input
-                            type="email"
-                            name="userEmail"
-                            id="userEmail"
-                            required
-                            placeholder="e.g., admin@organization.com"
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        />
-                    </div>
-                </div>
-            </div>
-            
-            <div class="border-b border-gray-200 pb-6">
-                <h3 class="text-xl font-semibold text-gray-900 mb-4">Academic & Location</h3>
-                <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-                    
-                    <div>
-                        <label for="country" class="block text-sm font-medium text-gray-700">
-                            Country <span class="text-red-500">*</span>
-                        </label>
-                        <input
-                            type="text"
-                            name="country"
-                            id="country"
-                            required
-                            placeholder="e.g., Canada"
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        />
-                    </div>
-
-                    <div>
-                        <label for="city" class="block text-sm font-medium text-gray-700">
-                            City <span class="text-red-500">*</span>
-                        </label>
-                        <input
-                            type="text"
-                            name="city"
-                            id="city"
-                            required
-                            placeholder="e.g., Toronto"
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        />
-                    </div>
-
-                    <div>
-                        <label for="worldRank" class="block text-sm font-medium text-gray-700">
-                            World Rank
-                        </label>
-                        <input
-                            type="number"
-                            name="worldRank"
-                            id="worldRank"
-                            placeholder="e.g., 50"
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        />
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 gap-6 mt-6 md:grid-cols-3">
-                    
-                    <div>
-                        <label htmlFor="subjectCategory" class="block text-sm font-medium text-gray-700">
-                            Subject Category <span class="text-red-500">*</span>
-                        </label>
-                        <select
-                            name="subjectCategory"
-                            id="subjectCategory"
-                            required
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    {/* ================= Submit ================= */}
+                    <div className="pt-5">
+                        <button
+                            type="submit"
+                            className="w-full py-3 px-4 rounded-lg shadow-xl text-lg font-medium text-white bg-[#04264e] transition"
                         >
-                            <option value="">Select Category</option>
-                            <option value="Engineering">Engineering</option>
-                            <option value="Arts">Arts & Humanities</option>
-                            <option value="Science">Natural Sciences</option>
-                        </select>
+                            Submit New Scholarship
+                        </button>
                     </div>
 
-                    <div>
-                        <label htmlFor="scholarshipCategory" class="block text-sm font-medium text-gray-700">
-                            Scholarship Category <span class="text-red-500">*</span>
-                        </label>
-                        <select
-                            name="scholarshipCategory"
-                            id="scholarshipCategory"
-                            required
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        >
-                            <option value="">Select Type</option>
-                            <option value="Partial">Partial Funding</option>
-                            <option value="Full">Fully Funded</option>
-                            <option value="Research">Research Grant</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label htmlFor="degree" class="block text-sm font-medium text-gray-700">
-                            Degree <span class="text-red-500">*</span>
-                        </label>
-                        <select
-                            name="degree"
-                            id="degree"
-                            required
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        >
-                            <option value="">Select Degree</option>
-                            <option value="Bachelor">Bachelor's</option>
-                            <option value="Master">Master's</option>
-                            <option value="PhD">PhD</option>
-                        </select>
-                    </div>
-                </div>
+                </form>
             </div>
-
-            <div class="border-b border-gray-200 pb-6">
-                <h3 class="text-xl font-semibold text-gray-900 mb-4">Financials & Deadlines</h3>
-                <div class="grid grid-cols-1 gap-6 md:grid-cols-4">
-                    
-                    <div>
-                        <label for="tuitionFees" class="block text-sm font-medium text-gray-700">
-                            Tuition Fees (USD)
-                        </label>
-                        <input
-                            type="number"
-                            name="tuitionFees"
-                            id="tuitionFees"
-                            placeholder="e.g., 25000 (Optional)"
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        />
-                    </div>
-
-                    <div>
-                        <label for="applicationFees" class="block text-sm font-medium text-gray-700">
-                            Application Fees (USD) <span class="text-red-500">*</span>
-                        </label>
-                        <input
-                            type="number"
-                            name="applicationFees"
-                            id="applicationFees"
-                            required
-                            placeholder="e.g., 100"
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        />
-                    </div>
-
-                    <div>
-                        <label for="serviceCharge" class="block text-sm font-medium text-gray-700">
-                            Service Charge (USD) <span class="text-red-500">*</span>
-                        </label>
-                        <input
-                            type="number"
-                            name="serviceCharge"
-                            id="serviceCharge"
-                            required
-                            placeholder="e.g., 50"
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        />
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-1 gap-6 mt-6 md:grid-cols-2">
-                    
-                    <div>
-                        <label for="deadline" class="block text-sm font-medium text-gray-700">
-                            Deadline <span class="text-red-500">*</span>
-                        </label>
-                        <input
-                            type="date"
-                            name="deadline"
-                            id="deadline"
-                            required
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        />
-                    </div>
-
-                    <div>
-                        <label for="postDate" class="block text-sm font-medium text-gray-700">
-                            Post Date 
-                        </label>
-                        <input
-                            type="date"
-                            name="postDate"
-                            id="postDate"
-                            value="2025-12-07" 
-                            readonly
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-gray-50 rounded-lg shadow-sm sm:text-sm cursor-not-allowed"
-                        />
-                    </div>
-                </div>
-            </div>
-
-            <div class="pt-5">
-                <button
-                    type="submit"
-                    class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-xl text-lg font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out"
-                >
-                    Submit New Scholarship
-                </button>
-            </div>
-        </form>
-        
-    </div>
-</div>
-  )
+        </div>
+    )
 }
 
 export default AddScholarship

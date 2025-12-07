@@ -1,6 +1,6 @@
 //import { useState } from 'react'
 //import DeleteModal from '../../Modal/DeleteModal'
-const CustomerOrderDataRow = () => {
+const ManageScholarshipDataRow = () => {
   //console.log(order)
   // let [isOpen, setIsOpen] = useState(false)
   // const closeModal = () => setIsOpen(false)
@@ -53,4 +53,4 @@ const CustomerOrderDataRow = () => {
   )
 }
 
-export default CustomerOrderDataRow
+export default ManageScholarshipDataRow
