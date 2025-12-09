@@ -117,47 +117,79 @@ const AddScholarship = () => {
                         </h3>
 
                         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-                            <input
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">
+                                    Country <span className="text-red-500">*</span>
+                                </label>
+                                <input
                                 placeholder="Country"
                                 {...register("country")}
                                 required
-                                className="input"
+                                className="input mt-2"
                             />
-                            <input
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">
+                                    City <span className="text-red-500">*</span>
+                                </label>
+                                <input
                                 placeholder="City"
                                 {...register("city")}
                                 required
-                                className="input"
+                                className="input mt-2"
                             />
-                            <input
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">
+                                    World Rank <span className="text-red-500">*</span>
+                                </label>
+                                <input
                                 type="number"
                                 placeholder="World Rank"
                                 {...register("worldRank")}
-                                className="input"
+                                className="input mt-2"
                             />
+                            </div>
                         </div>
 
                         <div className="grid grid-cols-1 gap-6 mt-6 md:grid-cols-3">
-                            <select {...register("subjectCategory")} required className="input">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">
+                                    Subject Category <span className="text-red-500">*</span>
+                                </label>
+                                <select {...register("subjectCategory")} required className="input mt-2">
                                 <option value="">Select Category</option>
                                 <option value="Engineering">Engineering</option>
                                 <option value="Arts">Arts & Humanities</option>
                                 <option value="Science">Natural Sciences</option>
                             </select>
+                            </div>
 
-                            <select {...register("scholarshipCategory")} required className="input">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">
+                                    Scholarship Category <span className="text-red-500">*</span>
+                                </label>
+                                <select {...register("scholarshipCategory")} required className="input mt-2">
                                 <option value="">Select Type</option>
                                 <option value="Partial">Partial Funding</option>
                                 <option value="Full">Fully Funded</option>
-                                <option value="Research">Research Grant</option>
+                                <option value="Research">Self-fund</option>
                             </select>
+                            </div>
 
-                            <select {...register("degree")} required className="input">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">
+                                    Degree <span className="text-red-500">*</span>
+                                </label>
+                                <select {...register("degree")} required className="input mt-2">
                                 <option value="">Select Degree</option>
                                 <option value="Bachelor">Bachelor's</option>
                                 <option value="Master">Master's</option>
                                 <option value="PhD">PhD</option>
                             </select>
+                            </div>
                         </div>
                     </div>
 

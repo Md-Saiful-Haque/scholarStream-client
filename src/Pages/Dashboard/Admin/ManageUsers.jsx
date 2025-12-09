@@ -1,10 +1,24 @@
 //import { useQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import UserDataRow from '../../../components/Dashboard/TableRows/UserDataRow'
-//import useAxiosSecure from '../../../hooks/useAxiosSecure'
+import useAxiosSecure from '../../../hooks/useAxiosSecure'
+import LoadingSpinner from '../../LoadingSpinner'
+
 
 
 const ManageUsers = () => {
-  //const axiosSecure = useAxiosSecure()
+  const axiosSecure = useAxiosSecure()
+
+  const { data: users = [], isLoading, refetch } = useQuery({
+    queryKey: ['users'],
+    queryFn: async () => {
+      const res = await axiosSecure('/users')
+      return res.data
+    }
+  })
+  //console.log(users)
+
+  if (isLoading) return <LoadingSpinner />
 
   return (
     <>
@@ -15,6 +29,12 @@ const ManageUsers = () => {
               <table className='min-w-full leading-normal'>
                 <thead>
                   <tr>
+                    <th
+                      scope='col'
+                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                    >
+                      Name
+                    </th>
                     <th
                       scope='col'
                       className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
@@ -37,7 +57,10 @@ const ManageUsers = () => {
                   </tr>
                 </thead>
                 <tbody>
-                 <UserDataRow />               
+                  {
+                    users.map(user => <UserDataRow key={user._id} user={user} refetch={refetch} />)
+                  }
+                                
                 </tbody>
               </table>
             </div>

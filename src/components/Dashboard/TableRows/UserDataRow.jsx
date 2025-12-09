@@ -1,18 +1,21 @@
 //import { useState } from 'react'
 //import UpdateUserRoleModal from '../../Modal/UpdateUserRoleModal'
 
-const UserDataRow = () => {
+const UserDataRow = ({ user }) => {
   // let [isOpen, setIsOpen] = useState(false)
   // const closeModal = () => setIsOpen(false)
-  
+
 
   return (
     <tr>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 '>jgf</p>
+        <p className='text-gray-900 '>{user.name}</p>
       </td>
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
-        <p className='text-gray-900 '>jgfd</p>
+        <p className='text-gray-900 '>{user.email}</p>
+      </td>
+      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>
+        <p className='text-gray-900 '>{user.role}</p>
       </td>
 
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm'>

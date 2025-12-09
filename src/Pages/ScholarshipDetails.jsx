@@ -1,7 +1,7 @@
 import React from 'react';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'react-router';
+import { Link, useParams } from 'react-router';
 
 const ScholarshipDetails = () => {
     const axiosSecure = useAxiosSecure()
@@ -55,7 +55,7 @@ const ScholarshipDetails = () => {
             </p>
 
             <div className="flex flex-wrap gap-3 text-sm">
-              <span className="bg-indigo-600 text-white px-3 py-1 rounded-full">
+              <span className="bg-[#04264e] text-white px-3 py-1 rounded-full">
                 {scholarshipCategory}
               </span>
 
@@ -104,12 +104,14 @@ const ScholarshipDetails = () => {
 
             {/* Apply Button */}
             <div className="pt-6">
+              <Link>
               <button
                 type="button"
-                className="w-full md:w-auto bg-indigo-600 text-white px-10 py-3 rounded-xl hover:bg-indigo-700 transition text-lg font-medium"
+                className="w-full md:w-auto bg-[#04264e] text-white px-10 py-3 rounded-xl transition text-lg font-medium"
               >
                 Apply for Scholarship
               </button>
+              </Link>
             </div>
           </div>
         </div>

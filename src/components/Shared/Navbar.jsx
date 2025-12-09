@@ -20,8 +20,9 @@ const Navbar = () => {
     }
 
     const links = <>
-        <li className='text-lg'><NavLink>Home</NavLink></li>
-        <li className='text-lg'><NavLink>All Scholarships</NavLink></li>
+        <li className='text-lg'><NavLink to={'/'}>Home</NavLink></li>
+        <li className='text-lg'><NavLink to={'/all-scholarships'}>All Scholarships</NavLink></li>
+        <li className='text-lg'><NavLink to={'/dashboard'}>Dashboard</NavLink></li>
     </>
     return (
         <div className='bg-[#324354]'>
