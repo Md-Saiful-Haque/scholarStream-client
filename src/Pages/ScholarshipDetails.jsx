@@ -2,41 +2,69 @@ import React from 'react';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { Link, useParams } from 'react-router';
+import useAuth from '../hooks/useAuth';
 
 const ScholarshipDetails = () => {
-    const axiosSecure = useAxiosSecure()
-    const { id } = useParams()
+  const axiosSecure = useAxiosSecure()
+  const { id } = useParams()
+  const { user } = useAuth()
+  
 
-    const { data: scholarship = {}, reviews = [] } = useQuery({
-        queryKey: ['scholarship', id],
-        queryFn: async () => {
-            const res = await axiosSecure.get(`/scholarship/${id}`)
-            return res.data
-        }
-    })
+  const { data: scholarship = {}, reviews = [] } = useQuery({
+    queryKey: ['scholarship', id],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/scholarship/${id}`)
+      return res.data
+    }
+  })
 
-    const {
-        _id,
-        scholarshipName,
-        universityName,
-        image,
-        city,
-        country,
-        description,
-        scholarshipCategory,
-        degree,
-        worldRank,
-        applicationFees,
-        tuitionFees,
-        deadline,
-        subjectCategory
-    } = scholarship;
+  const {
+    _id,
+    scholarshipName,
+    universityName,
+    image,
+    city,
+    country,
+    description,
+    scholarshipCategory,
+    degree,
+    worldRank,
+    applicationFees,
+    tuitionFees,
+    deadline,
+    subjectCategory,
+    serviceCharge
+  } = scholarship;
+
+  const handleApply = async () => {
+    const applicantInfo = {
+      scholarshipId: _id,
+      userName: user?.displayName,
+      userEmail: user?.email,
+      image,
+      universityName,
+      scholarshipName,
+      scholarshipCategory,
+      subjectCategory,
+      city,
+      country,
+      degree,
+      applicationFees,
+      serviceCharge,
+      applicationStatus: 'pending',
+      paymentStatus: 'unpaid',
+      applicationDate: new Date()
+    }
+
+    const res = await axiosSecure.post('/create-checkout-session', applicantInfo)
+    window.location.href = res.data.url
+  }
 
 
-    return (
+  return (
     <div className="bg-gray-50 min-h-screen py-10">
       <div className="max-w-6xl mx-auto px-4">
-        
+
         {/* Header Section */}
         <div className="bg-white rounded-2xl shadow overflow-hidden">
           <img
@@ -105,12 +133,13 @@ const ScholarshipDetails = () => {
             {/* Apply Button */}
             <div className="pt-6">
               <Link>
-              <button
-                type="button"
-                className="w-full md:w-auto bg-[#04264e] text-white px-10 py-3 rounded-xl transition text-lg font-medium"
-              >
-                Apply for Scholarship
-              </button>
+                <button
+                  onClick={handleApply}
+                  type="button"
+                  className="w-full md:w-auto bg-[#04264e] text-white px-10 py-3 rounded-xl transition text-lg font-medium"
+                >
+                  Apply for Scholarship
+                </button>
               </Link>
             </div>
           </div>
@@ -174,7 +203,7 @@ const ScholarshipDetails = () => {
 
       </div>
     </div>
-    );
+  );
 };
 
 export default ScholarshipDetails;

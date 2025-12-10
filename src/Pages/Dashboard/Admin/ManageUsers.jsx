@@ -3,11 +3,14 @@ import { useQuery } from '@tanstack/react-query'
 import UserDataRow from '../../../components/Dashboard/TableRows/UserDataRow'
 import useAxiosSecure from '../../../hooks/useAxiosSecure'
 import LoadingSpinner from '../../LoadingSpinner'
+import useRole from '../../../hooks/useRole'
 
 
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure()
+  const { role } = useRole()
+  console.log(role)
 
   const { data: users = [], isLoading, refetch } = useQuery({
     queryKey: ['users'],
@@ -60,7 +63,7 @@ const ManageUsers = () => {
                   {
                     users.map(user => <UserDataRow key={user._id} user={user} refetch={refetch} />)
                   }
-                                
+
                 </tbody>
               </table>
             </div>

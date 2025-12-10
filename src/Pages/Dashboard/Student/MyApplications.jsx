@@ -1,103 +1,141 @@
-import React from 'react';
+import React, { useState } from 'react';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { useQuery } from '@tanstack/react-query';
+import useAuth from '../../../hooks/useAuth';
+import { FaEdit, FaInfoCircle, FaMoneyBillWave, FaStar } from 'react-icons/fa';
+import AddReviewModal from '../../../components/Modal/AddReviewModal';
+import DetailsModal from '../../../components/Modal/DetailsModal';
+import LoadingSpinner from '../../LoadingSpinner';
 
 const MyApplications = () => {
-    return (
-        <div className="p-4 sm:p-6 lg:p-8 bg-gray-50 min-h-screen">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-extrabold text-gray-900 mb-6 border-b pb-2">
-          ⭐ My Applications
-        </h2>
+  const { user } = useAuth()
+  const axiosSecure = useAxiosSecure()
+  const [selectedApp, setSelectedApp] = useState(null);
+  const [reviewApp, setReviewApp] = useState(null);
 
-        <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-100">
-              <tr>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  ID
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Scholarship
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Reviewer / Date
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Rating
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Comment
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Status
-                </th>
-                <th scope="col" className="relative px-6 py-3">
-                  <span className="sr-only">Actions</span>
-                </th>
-              </tr>
-            </thead>
-            {/* The tbody is left empty here, as data mapping is excluded */}
-            <tbody className="bg-white divide-y divide-gray-200">
-              {/* Place your review data mapping logic here when adding functionality */}
-              
-              {/* --- Example Row Markup (For visual structure only, can be removed) --- */}
-              <tr className="hover:bg-indigo-50/50">
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-400">
-                  (Data placeholder)
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-indigo-400 font-semibold">
-                  Scholarship Title
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-medium text-gray-400">Reviewer Name</div>
-                  <div className="text-xs text-gray-300">Submitted: 2025-00-00</div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                  ★★★★☆
-                </td>
-                <td className="px-6 py-4 max-w-xs truncate text-sm text-gray-400">
-                  (Comment Snippet...)
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-200 text-gray-600">
-                    Status
-                  </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
-                  <a href="#" className="text-gray-400 hover:text-gray-600">
-                    View
-                  </a>
-                  <span className="text-gray-200">|</span>
-                  <a href="#" className="text-gray-400 hover:text-gray-600">
-                    Action
-                  </a>
-                </td>
-              </tr>
-              {/* --- End Example Row --- */}
+  console.log(selectedApp)
 
-            </tbody>
-          </table>
-        </div>
+  const { data: applications = [], isLoading } = useQuery({
+    queryKey: ['applications', user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/my-applications/${user?.email}`)
+      return res.data
+    }
+  })
+
+  const handlePayment = async() => {
+    
+    const res = await axiosSecure.post('/create-checkout-session', applicantInfo)
+    window.location.href = res.data.url
+  }
+
+  if(isLoading) return <LoadingSpinner />
+
+  return (
+    <div className="p-6">
+
+      <h2 className="text-3xl font-bold mb-6">My Applications</h2>
+
+      <div className="overflow-x-auto">
+        <table className="table table-zebra w-full">
+
+          <thead>
+            <tr>
+              <th>University</th>
+              <th>Address</th>
+              <th>Feedback</th>
+              <th>Subject</th>
+              <th>Fees</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+
+          <tbody>
+            {applications.map(app => (
+              <tr key={app._id}>
+
+                <td>{app.universityName}</td>
+
+                <td>
+                  {app.city}, {app.country}
+                </td>
+
+                <td>{app.feedback || "-"}</td>
+
+                <td>{app.subjectCategory}</td>
+
+                <td>${app.applicationFees}</td>
+
+                <td>{app.applicationStatus}</td>
+
+
+                <td className="space-x-2">
+
+                  {/* ✅ Details */}
+                  <button
+                    className="btn btn-info btn-sm"
+                    onClick={() => setSelectedApp(app)}
+                  >
+                    <FaInfoCircle /> Details
+                  </button>
+
+
+                  {/* ✅ Edit (Pending only) */}
+                  {app.applicationStatus === "pending" && (
+                    <button className="btn btn-warning btn-sm">
+                      <FaEdit /> Edit
+                    </button>
+                  )}
+
+
+                  {/* ✅ Pay (Pending + unpaid) */}
+                  {app.applicationStatus === "pending" &&
+                    app.paymentStatus === "unpaid" && (
+                      <button onClick={handlePayment} className="btn btn-success btn-sm">
+                        <FaMoneyBillWave /> Pay
+                      </button>
+                    )}
+
+
+                  {/* ✅ Add Review (Completed only) */}
+                  {app.applicationStatus === "completed" && (
+                    <button
+                      className="btn btn-primary btn-sm"
+                      onClick={() => setReviewApp(app)}
+                    >
+                      <FaStar /> Add Review
+                    </button>
+                  )}
+
+                </td>
+
+              </tr>
+            ))}
+          </tbody>
+
+        </table>
       </div>
+
+      {/* ✅ Details Modal */}
+      {selectedApp && (
+        <DetailsModal
+          app={selectedApp}
+          onClose={() => setSelectedApp(null)}
+        />
+      )}
+
+      {/* ✅ Add Review Modal */}
+      {reviewApp && (
+        <AddReviewModal
+          app={reviewApp}
+          onClose={() => setReviewApp(null)}
+        />
+      )}
+
     </div>
-    );
+  );
 };
 
 export default MyApplications;
