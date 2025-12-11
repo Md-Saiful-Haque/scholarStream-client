@@ -1,41 +1,39 @@
 import React, { useState } from 'react';
-import useAuth from '../../hooks/useAuth';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
-import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 
-const AddReviewModal = ({ app, onClose }) => {
-    const { user } = useAuth()
+
+const MyReviewsEditModal = ({ myReviews, onClose, refetch }) => {
     const axiosSecure = useAxiosSecure()
-    const [rating, setRating] = useState(5);
-    const [comment, setComment] = useState("");
-    
-    const handleSubmitReview = async () => {
-        const reviewInfo = {
-            scholarshipId: app?.scholarshipId,
-            scholarshipName: app?.scholarshipName,
-            universityName: app?.universityName,
-            userName: app?.userName,
-            userEmail: app?.userEmail,
-            userImage: user?.photoURL,
+    const [rating, setRating] = useState(myReviews?.ratingPoint);
+    const [comment, setComment] = useState(myReviews?.reviewComment);
+
+    const handleReviewUpdate = async () => {
+        const updatedReview = {
             ratingPoint: rating,
             reviewComment: comment,
-        }
-
-        const res = await axiosSecure.post('/add-reviews', reviewInfo)
-        if (res.data.insertedId) {
-            toast('Review Submitted Successfully')
-            onClose()
-        }
-    }
+        };
+        await axiosSecure.patch(`/update-reviews/${myReviews._id}`, updatedReview)
+            .then(res => {
+                if (res.data.modifiedCount) {
+                    refetch()
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: 'Review has been updated.',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+                onClose()
+        })
+    };
 
     return (
         <div className="modal modal-open">
             <div className="modal-box">
 
                 <h3 className="font-bold text-xl mb-3">Add Review</h3>
-
-                <p><b>Scholarship:</b> {app.scholarshipName}</p>
-                <p><b>University:</b> {app.universityName}</p>
 
                 <div className="mt-4">
                     <label className="label">Rating (1-5)</label>
@@ -58,7 +56,8 @@ const AddReviewModal = ({ app, onClose }) => {
                 </div>
 
                 <div className="modal-action">
-                    <button onClick={handleSubmitReview} className="btn bg-[#04264e] text-white">
+                    <button onClick={handleReviewUpdate}
+                        className="btn bg-[#04264e] text-white">
                         Submit Review
                     </button>
 
@@ -72,4 +71,4 @@ const AddReviewModal = ({ app, onClose }) => {
     );
 };
 
-export default AddReviewModal;
+export default MyReviewsEditModal;

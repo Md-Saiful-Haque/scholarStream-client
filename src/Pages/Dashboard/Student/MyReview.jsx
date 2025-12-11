@@ -1,8 +1,29 @@
-import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React, { useState } from 'react';
+import useAuth from '../../../hooks/useAuth';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import LoadingSpinner from '../../LoadingSpinner';
+import { FaEdit } from 'react-icons/fa';
+import { MdDeleteSweep } from "react-icons/md";
+import MyReviewsEditModal from '../../../components/Modal/MyReviewsEditModal';
 
 const MyReview = () => {
-    return (
-        <div className="p-4 sm:p-6 lg:p-8 bg-gray-50 min-h-screen">
+  const { user } = useAuth()
+  const axiosSecure = useAxiosSecure()
+  const [myReviews, setMyReviews] = useState(null);
+
+  const { data: reviews = [], isLoading, refetch } = useQuery({
+    queryKey: ['reviews', user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/my-reviews/${user?.email}`)
+      return res.data
+    }
+  })
+
+  if (isLoading) return <LoadingSpinner />
+
+  return (
+    <div className="p-4 sm:p-6 lg:p-8 bg-gray-50 min-h-screen">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl font-extrabold text-gray-900 mb-6 border-b pb-2">
           ⭐ My Reviews
@@ -16,19 +37,26 @@ const MyReview = () => {
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  ID
+                  Scholarship Name
+
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Scholarship
+                  University Name
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Reviewer / Date
+                  Review Date
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Review Comment
                 </th>
                 <th
                   scope="col"
@@ -40,64 +68,56 @@ const MyReview = () => {
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Comment
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Status
-                </th>
-                <th scope="col" className="relative px-6 py-3">
-                  <span className="sr-only">Actions</span>
+                  Actions
                 </th>
               </tr>
             </thead>
             {/* The tbody is left empty here, as data mapping is excluded */}
             <tbody className="bg-white divide-y divide-gray-200">
-              {/* Place your review data mapping logic here when adding functionality */}
-              
-              {/* --- Example Row Markup (For visual structure only, can be removed) --- */}
-              <tr className="hover:bg-indigo-50/50">
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-400">
-                  (Data placeholder)
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-indigo-400 font-semibold">
-                  Scholarship Title
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-medium text-gray-400">Reviewer Name</div>
-                  <div className="text-xs text-gray-300">Submitted: 2025-00-00</div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                  ★★★★☆
-                </td>
-                <td className="px-6 py-4 max-w-xs truncate text-sm text-gray-400">
-                  (Comment Snippet...)
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-200 text-gray-600">
-                    Status
-                  </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
-                  <a href="#" className="text-gray-400 hover:text-gray-600">
-                    View
-                  </a>
-                  <span className="text-gray-200">|</span>
-                  <a href="#" className="text-gray-400 hover:text-gray-600">
-                    Action
-                  </a>
-                </td>
-              </tr>
-              {/* --- End Example Row --- */}
+              {
+                reviews.map(review => <tr key={review._id} className="hover:bg-indigo-50/50">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-400">
+                    {review.scholarshipName}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-indigo-400 font-semibold">
+                    {review.universityName}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm font-medium text-gray-400">{review.userName}</div>
+                    <div className="text-xs text-gray-400">{review.
+                      createdAt}</div>
+                  </td>
+                  <td className="px-6 py-4 text-wrap text-sm text-gray-600">
+                    {review.reviewComment}
+                  </td>
+                  <td className="px-6 py-4 text-md text-gray-500">
+                    {review.ratingPoint} Out of 5
+                  </td>
+                  <td className="px-6 py-4 flex gap-1.5">
+                    <button onClick={() => setMyReviews(review)} className="btn btn-warning btn-sm">
+                      <FaEdit /> Edit
+                    </button>
+                    <button className="btn btn-error btn-sm">
+                      <MdDeleteSweep /> Delete
+                    </button>
+                  </td>
+                </tr>)
+              }
 
             </tbody>
           </table>
         </div>
       </div>
+      
+      {myReviews && (
+        <MyReviewsEditModal
+          myReviews={myReviews}
+          refetch={refetch}
+          onClose={() => setMyReviews(null)}
+        />
+      )}
     </div>
-    );
+  );
 };
 
 export default MyReview;

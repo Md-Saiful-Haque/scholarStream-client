@@ -20,30 +20,18 @@ const ManageApplicationsDataRow = ({ application, refetch }) => {
     return res.data
   }
 
-  const handleDelete = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
-    }).then((res) => {
-      if (res.isConfirmed) {
-        axiosSecure.delete(`/delete-application/${id}`)
-          .then(res => {
-            if (res.data.deletedCount) {
-              Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success"
-              });
-            }
-            refetch()
-          })
-      }
-    })
+  const handleCancel = (id) => {
+    axiosSecure.patch(`/rejected-application/${id}`)
+      .then(res => {
+        if (res.data.modifiedCount) {
+          Swal.fire({
+            title: "Rejected!",
+            text: "Your scholarship has been rejected.",
+            icon: "success"
+          });
+        }
+        refetch()
+      })
   }
 
   return (
@@ -96,7 +84,7 @@ const ManageApplicationsDataRow = ({ application, refetch }) => {
           </button>
 
           <button
-            onClick={() => handleDelete(application._id)}
+            onClick={() => handleCancel(application._id)}
             className='relative disabled:cursor-not-allowed cursor-pointer inline-block px-3 py-2 font-semibold text-green-900 leading-tight'
           >
             <span
