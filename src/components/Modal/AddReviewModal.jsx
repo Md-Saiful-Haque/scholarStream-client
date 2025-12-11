@@ -1,9 +1,31 @@
 import React, { useState } from 'react';
+import useAuth from '../../hooks/useAuth';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+import { toast } from 'react-toastify';
 
 const AddReviewModal = ({ app, onClose }) => {
-    console.log(app)
+    const { user } = useAuth()
+    const axiosSecure = useAxiosSecure()
     const [rating, setRating] = useState(5);
     const [comment, setComment] = useState("");
+
+    const handleSubmitReview = async () => {
+        const reviewInfo = {
+            scholarshipId: app?.scholarshipId,
+            universityName: app?.universityName,
+            userName: app?.userName,
+            userEmail: app?.userEmail,
+            userImage: user?.photoURL,
+            ratingPoint: rating,
+            reviewComment: comment,
+        }
+
+        const res = await axiosSecure.post('/add-reviews', reviewInfo)
+        if (res.data.insertedId) {
+            toast('Review Submitted Successfully')
+            onClose()
+        }
+    }
 
     return (
         <div className="modal modal-open">
@@ -35,7 +57,7 @@ const AddReviewModal = ({ app, onClose }) => {
                 </div>
 
                 <div className="modal-action">
-                    <button className="btn btn-primary">
+                    <button onClick={handleSubmitReview} className="btn bg-[#04264e] text-white">
                         Submit Review
                     </button>
 

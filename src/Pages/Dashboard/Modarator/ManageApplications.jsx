@@ -1,22 +1,21 @@
-//import { useQuery } from '@tanstack/react-query'
-
+import { useQuery } from '@tanstack/react-query'
 import ManageApplicationsDataRow from "../../../components/Dashboard/TableRows/ManageApplicationsDataRow"
-
-//import useAuth from '../../../hooks/useAuth'
-//import useAxiosSecure from '../../../hooks/useAxiosSecure'
+import useAxiosSecure from '../../../hooks/useAxiosSecure'
+import LoadingSpinner from '../../LoadingSpinner'
 
 const ManageApplications = () => {
   // const { user } = useAuth()
-  // const axiosSecure = useAxiosSecure()
+  const axiosSecure = useAxiosSecure()
 
-  // const { data: orders = [] } = useQuery({
-  //   queryKey: ['orders', user?.email],
-  //   queryFn: async () => {
-  //     const res = await axiosSecure(`/manage-orders/${user.email}`)
-  //     return res.data
-  //   }
-  // })
+  const { data: applications = [], refetch, isLoading } = useQuery({
+    queryKey: ['applications'],
+    queryFn: async () => {
+      const res = await axiosSecure.get('/all-applications')
+      return res.data
+    }
+  })
 
+  if(isLoading) return <LoadingSpinner />
   return (
     <>
       <div className='container mx-auto px-4 sm:px-8'>
@@ -28,51 +27,54 @@ const ManageApplications = () => {
                   <tr>
                     <th
                       scope='col'
-                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-md font-bold'
                     >
-                      Name
+                       Applicant Name  
                     </th>
                     <th
                       scope='col'
-                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-md font-bold'
                     >
-                      Customer
+                      Applicant Email
                     </th>
                     <th
                       scope='col'
-                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-md font-bold'
                     >
-                      Price
+                      University Name
                     </th>
                     <th
                       scope='col'
-                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-md font-bold'
                     >
-                      Quantity
+                      Application Feedback   
                     </th>
-                    {/* <th
-                      scope='col'
-                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
-                    >
-                      Address
-                    </th> */}
                     <th
                       scope='col'
-                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-md font-bold'
                     >
-                      Status
+                      Payment Status
+                    </th> 
+                    <th
+                      scope='col'
+                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-md font-bold'
+                    >
+                      Application Status
                     </th>
 
                     <th
                       scope='col'
-                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal'
+                      className='px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-md font-bold'
                     >
-                      Action
+                      Actions
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                 <ManageApplicationsDataRow />
+                  {
+                    applications.map(application => <ManageApplicationsDataRow key={application._id} application={application} refetch={refetch} />)
+                  }
+                 
                 </tbody>
               </table>
             </div>

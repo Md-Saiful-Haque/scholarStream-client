@@ -23,10 +23,28 @@ const MyApplications = () => {
     }
   })
 
-  const handlePayment = async() => {
-    
-    const res = await axiosSecure.post('/create-checkout-session', applicantInfo)
-    window.location.href = res.data.url
+  const handlePayment = async (app) => {
+    const applicantInfo = {
+      scholarshipId: app.scholarshipId,
+      userName: app.userName,
+      userEmail: app.userEmail,
+      image: app.image,
+      universityName: app.universityName,
+      scholarshipName: app.scholarshipName,
+      scholarshipCategory: app.scholarshipCategory,
+      subjectCategory: app.subjectCategory,
+      city: app.city,
+      country: app.country,
+      degree: app.degree,
+      applicationFees: app.applicationFees,
+      serviceCharge: app.serviceCharge,
+      applicationStatus: 'pending',
+      paymentStatus: 'unpaid',
+      applicationDate: new Date()
+    }
+
+    const res = await axiosSecure.post('/create-checkout-session', applicantInfo);
+    window.location.assign(res.data.url)
   }
 
   if(isLoading) return <LoadingSpinner />
@@ -71,7 +89,7 @@ const MyApplications = () => {
                 <td>{app.applicationStatus}</td>
 
 
-                <td className="space-x-2">
+                <td className="space-x-2 flex gap-1.5">
 
                   {/* ✅ Details */}
                   <button
@@ -93,7 +111,7 @@ const MyApplications = () => {
                   {/* ✅ Pay (Pending + unpaid) */}
                   {app.applicationStatus === "pending" &&
                     app.paymentStatus === "unpaid" && (
-                      <button onClick={handlePayment} className="btn btn-success btn-sm">
+                      <button onClick={() => handlePayment(app)} className="btn btn-success btn-sm">
                         <FaMoneyBillWave /> Pay
                       </button>
                     )}
