@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import ScholarshipCard from '../components/ScholarshipCard';
 import TestimonialsSection from '../components/TestimonialsSection';
 import ContactUsSection from '../components/ContactUsSection';
+import FAQSection from '../components/FAQSection';
 
 const Home = () => {
     const axiosSecure = useAxiosSecure()
@@ -33,6 +34,7 @@ const Home = () => {
                 </div>
                 <TestimonialsSection />
                 <ContactUsSection />
+                <FAQSection />
             </div>
         </>
     );

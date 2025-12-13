@@ -1,6 +1,7 @@
 // src/components/ContactUsSection.jsx
 import React from 'react';
 import { motion } from "motion/react"
+import { toast } from 'react-toastify';
 // Icons (You would need to install a library like 'react-icons' for these)
 // Example: import { Mail, Phone, MapPin } from 'lucide-react'; 
 
@@ -22,12 +23,11 @@ const ContactUsSection = () => {
   // Simple form submission handler (replace with actual API/service integration)
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Thank you for your message! We will get back to you soon.");
-    // In a real application, you'd send this data to a server
+    toast.success("Thank you for your message! We will get back to you soon.");
   };
 
   return (
-    <section className="py-16 sm:py-24 bg-white" id="contact">
+    <section className="py-16 sm:py-24 bg-[#c4e5f2]" id="contact">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:grid lg:grid-cols-2 lg:gap-16">
           
@@ -43,7 +43,7 @@ const ContactUsSection = () => {
               Get in Touch
             </motion.h2>
             <motion.p
-              className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl"
+              className="mt-2 text-3xl font-extrabold text-[#04264e] sm:text-4xl"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.5 }}
@@ -173,7 +173,7 @@ const ContactUsSection = () => {
                 <motion.div className="sm:col-span-2" variants={itemVariants}>
                   <button
                     type="submit"
-                    className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out"
+                    className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-[#04264e] focus:outline-none transition duration-150 ease-in-out"
                   >
                     Submit Message
                   </button>
