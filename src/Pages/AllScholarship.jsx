@@ -7,26 +7,34 @@ import LoadingSpinner from './LoadingSpinner';
 
 const AllScholarship = () => {
     const axiosSecure = useAxiosSecure()
-    const [inputText, setInputText] = useState("");  // user typing
+    const [inputText, setInputText] = useState(""); 
     const [search, setSearch] = useState("");
+    const [page, setPage] = useState(1);
+    
 
-    const { data: scholarships = [], isLoading } = useQuery({
-        queryKey: ['scholarships', search],
+    const { data, isLoading } = useQuery({
+        queryKey: ['scholarships', search, page],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/scholarship?search=${search}`)
+            const res = await axiosSecure.get(`/scholarship?search=${search}&page=${page}`)
             return res.data
         }
     })
 
+    const scholarships = data?.result || [];
+    const total = data?.total || 0;
+    const limit = 6;
+    const totalPages = Math.ceil(total / limit);
+
     const handleSearchClick = () => {
-        setSearch(inputText); // now search will run
+        setSearch(inputText); 
+        setPage(1)
     };
 
     if(isLoading) return <LoadingSpinner />
 
     return (
 
-        <div className='pt-10 bg-[#c4e5f2] pb-10'>
+        <div className='pt-8 bg-[#c4e5f2] pb-10'>
             <Container>
                 <title></title>
                 <div className='flex justify-between items-center mb-10 max-w-[1200px] mx-auto pt-4'>
@@ -67,6 +75,66 @@ const AllScholarship = () => {
                         scholarships.map(scholarship => <ScholarshipCard key={scholarship._id} scholarship={scholarship}></ScholarshipCard>)
                     }
                 </div>
+
+                {/* PAGINATION GRADIENT UI */}
+<div className="flex justify-center mt-10">
+    <div className="flex gap-2 items-center">
+
+        {/* PREV BUTTON */}
+        <button
+            disabled={page === 1}
+            onClick={() => setPage(page - 1)}
+            className={`
+                px-5 py-2 rounded-xl text-white font-medium
+                transition-all duration-300
+                ${page === 1 
+                    ? "bg-gray-300 cursor-not-allowed" 
+                    : "bg-linear-to-r from-blue-600 to-blue-800 hover:opacity-90 shadow-md"}
+            `}
+        >
+            « Prev
+        </button>
+
+        {/* PAGE NUMBERS */}
+        <div className="flex gap-2">
+            {[...Array(totalPages)].map((_, idx) => {
+                const isActive = page === idx + 1;
+                return (
+                    <button
+                        key={idx}
+                        onClick={() => setPage(idx + 1)}
+                        className={`
+                            w-10 h-10 flex items-center justify-center rounded-xl font-semibold
+                            transition-all duration-300
+                            ${isActive
+                                ? "bg-linear-to-r from-blue-600 to-blue-800 text-white shadow-lg scale-105"
+                                : "bg-white text-blue-700 border border-blue-300 hover:bg-blue-700 hover:text-white"}
+                        `}
+                    >
+                        {idx + 1}
+                    </button>
+                );
+            })}
+        </div>
+
+        {/* NEXT BUTTON */}
+        <button
+            disabled={page === totalPages}
+            onClick={() => setPage(page + 1)}
+            className={`
+                px-5 py-2 rounded-xl text-white font-medium
+                transition-all duration-300
+                ${page === totalPages
+                    ? "bg-gray-300 cursor-not-allowed"
+                    : "bg-linear-to-r from-blue-600 to-blue-800 hover:opacity-90 shadow-md"}
+            `}
+        >
+            Next »
+        </button>
+
+    </div>
+</div>
+
             </Container>
         </div>
 

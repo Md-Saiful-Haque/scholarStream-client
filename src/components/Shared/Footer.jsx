@@ -32,7 +32,7 @@ const Footer = () => {
                         {/* Email Address */}
                         <div className="contact-item flex my-2 items-center gap-1.5">
                             <FaEnvelope className="icon text-[#f1cf69]" />
-                            <span className="info-text">needhelp@company.com</span>
+                            <span className="info-text">support@scholarshipfinder.com</span>
                         </div>
 
                         {/* Address */}

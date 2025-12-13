@@ -175,7 +175,7 @@ const AddScholarship = () => {
                                 <option value="">Select Type</option>
                                 <option value="Partial">Partial Funding</option>
                                 <option value="Full">Fully Funded</option>
-                                <option value="Research">Self-fund</option>
+                                <option value="Self-fund">Self-fund</option>
                             </select>
                             </div>
 
