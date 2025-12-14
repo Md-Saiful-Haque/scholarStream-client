@@ -89,11 +89,11 @@ const Login = () => {
                     {/* Submit Button */}
                     <button
                         type="submit"
-                        className="w-full bg-[#04264e] text-white py-3 rounded-lg font-semibold text-lg hover:bg-[#324354] hover:text-white focus:outline-none focus:ring-4 focus:ring-green-300 transition duration-150 mt-2"
+                        className="w-full bg-[#04264e] text-white py-3 rounded-lg font-semibold text-lg  focus:outline-none transition duration-150 mt-2"
                     >
                         SignIn your account
                     </button>
-                    <p className='text-center my-5'>Don't Have An Account? <Link to={'/register'} className='text-[#F75B5F]'>Register</Link></p>
+                    <p className='text-center my-5'>Don't Have An Account? <Link to={'/auth/register'} className='text-[#F75B5F]'>Register</Link></p>
                 </form>
             </div>
         </div>

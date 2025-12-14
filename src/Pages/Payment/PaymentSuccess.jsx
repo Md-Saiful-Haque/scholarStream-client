@@ -9,30 +9,15 @@ const PaymentSuccess = () => {
     const [searchParams] = useSearchParams();
     const sessionId = searchParams.get('session_id')
 
-    // useEffect(() => {
-    //     if (sessionId) {
-    //         axiosSecure.get(`/payment-success/${sessionId}`)
-    //             .then(res => {
-    //                 if (res.data.success) {
-    //                     console.log(res.data)
-    //                 }
-    //                 else {
-    //                     console.log("❌ Verification failed")
-    //                 }
-    //             })
-    //             .catch(err => console.log(err))
-    //     }
-
-    // }, [axiosSecure, sessionId])
-
     useEffect(() => {
         if (sessionId) {
             axiosSecure.post("/payment-success", { sessionId })
                 .then(res => {
                     if (res.data.success) {
-                        console.log(res.data.success)
+                        //console.log(res.data.success)
                         setApplicantData(res.data.data)
-                        console.log(res.data.data)
+                        console.log(res.data, res)
+
                     }
                 })
         }
@@ -53,21 +38,21 @@ const PaymentSuccess = () => {
 
                     <p>
                         <strong>Scholarship:</strong>
-                        {applicantData?.scholarshipName}
+                         {applicantData?.scholarshipName}
                     </p>
 
                     <p>
                         <strong>University:</strong>
-                        {applicantData?.universityName}
+                         {applicantData?.universityName}
                     </p>
 
                     <p>
                         <strong>Amount Paid:</strong>
-                        ${applicantData?.paidAmount}
+                         ${applicantData?.paidAmount}
                     </p>
 
-                    <p className='text-sm text-gray-500'>
-                        Transaction ID: {applicantData?.transactionId}
+                    <p className='text-md text-gray-500'>
+                        <strong>Transaction ID:</strong> {applicantData?.transactionId}
                     </p>
 
                 </div>

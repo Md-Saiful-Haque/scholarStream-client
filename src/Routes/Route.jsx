@@ -18,6 +18,7 @@ import AllScholarship from "../Pages/AllScholarship";
 import ScholarshipDetails from "../Pages/ScholarshipDetails";
 import PaymentSuccess from "../Pages/Payment/PaymentSuccess";
 import Analytics from "../Pages/Dashboard/Common/Analytics";
+import PaymentFailed from "../Pages/Payment/PaymentFailed";
 
 
 export const router = createBrowserRouter([
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
             {
                 path: '/payment-success',
                 element: <PaymentSuccess />
+            },
+            {
+                path: '/payment-failed/:id',
+                element: <PaymentFailed />
             }
         ]
     },

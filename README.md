@@ -1,16 +1,120 @@
-# React + Vite
+# 🎓 ScholarStream – Scholarship Management Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ScholarStream is a full-stack **MERN** application designed to connect students with scholarship opportunities worldwide. It simplifies scholarship discovery, application, payment, and review management through a role-based dashboard system for **Students**, **Moderators**, and **Admins**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌐 Live Website
+🔗 **Live Link:** https://your-live-site-url.com  
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📌 Project Purpose
+The purpose of ScholarStream is to:
+- Help students easily discover and apply for scholarships
+- Streamline scholarship management for universities and organizations
+- Provide secure payment processing for applications
+- Enable admins and moderators to manage users, scholarships, and applications efficiently
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🧑‍🤝‍🧑 User Roles
+- **Student** – Browse scholarships, apply, pay fees, track applications, and submit reviews
+- **Moderator** – Review applications, provide feedback, manage application status, and moderate reviews
+- **Admin** – Manage users, scholarships, analytics, and platform data
+
+---
+
+## ✨ Key Features
+
+### 🔐 Authentication & Authorization
+- Email & Password Authentication
+- Google Social Login
+- JWT-based API security
+- Role-based route protection (Admin / Moderator / Student)
+- Password validation (min length, uppercase, special character)
+
+---
+
+### 🏠 Public Pages
+- Home page with banner, animations (Framer Motion), top scholarships & extra sections
+- All Scholarships page with:
+  - Server-side search
+  - Filter by category/country
+  - Sort by application fees or post date
+  - Pagination
+- Scholarship Details page with:
+  - Full scholarship information
+  - Reviews & ratings
+  - Apply button (redirects to payment)
+- Login & Register pages
+- Custom 404 Error Page
+
+---
+
+### 💳 Payment System
+- Stripe payment integration
+- Checkout page (Private)
+- Payment Success page
+- Payment Failed page
+- Application saved on both success & failure
+- Retry payment option from dashboard
+
+---
+
+### 📊 Dashboard (Role Based)
+
+#### 👨‍🎓 Student Dashboard
+- My Profile
+- My Applications (edit, delete, pay if pending)
+- Add & manage reviews
+- View application feedback from moderators
+
+#### 🧑‍💼 Moderator Dashboard
+- Manage all applied applications
+- Update application status (Pending → Processing → Completed / Rejected)
+- Provide feedback
+- View & delete reviews
+
+#### 🛠️ Admin Dashboard
+- Add, update, delete scholarships
+- Manage users & roles
+- Platform analytics:
+  - Total users
+  - Total scholarships
+  - Total fees collected
+  - Charts (Bar / Pie)
+
+---
+
+## 🗂️ Database Collections
+- **Users**
+- **Scholarships**
+- **Applications**
+- **Reviews**
+
+---
+
+## 🛠️ Technologies Used
+
+### Frontend
+- React
+- React Router DOM
+- Tailwind CSS
+- DaisyUI
+- Firebase Authentication
+- Framer Motion
+- Axios
+- Stripe.js
+
+### Backend
+- Node.js
+- Express.js
+- MongoDB
+- JWT (JSON Web Token)
+- Stripe
+- CORS
+- dotenv
+
+---
+

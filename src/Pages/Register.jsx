@@ -180,7 +180,7 @@ const Register = () => {
                     {/* Submit Button */}
                     <button
                         type="submit"
-                        className="w-full bg-[#04264e] text-white py-3 rounded-lg font-semibold text-lg hover:bg-[#324354] hover:text-white focus:outline-none focus:ring-4 focus:ring-green-300 transition duration-150"
+                        className="w-full bg-[#04264e] text-white py-3 rounded-lg font-semibold text-lg  hover:text-white focus:outline-none transition duration-150"
                     >
                         Create your account
                     </button>
