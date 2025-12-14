@@ -51,7 +51,7 @@ const ScholarshipDetails = () => {
       city,
       country,
       degree,
-      applicationFees,
+      applicationFees: Number(applicationFees),
       serviceCharge,
       applicationStatus: 'pending',
       paymentStatus: 'unpaid',

@@ -17,6 +17,7 @@ import useRole from '../../../hooks/useRole'
 import LoadingSpinner from '../../../Pages/LoadingSpinner'
 
 
+
 const Sidebar = () => {
   const { logOut } = useAuth()
   const [isActive, setActive] = useState(false)
@@ -53,7 +54,7 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-[#c4e5f2] w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${isActive && '-translate-x-full'
+        className={`z-10 top-[95px] md:fixed flex flex-col justify-between overflow-x-hidden bg-[#c4e5f2] w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${isActive && '-translate-x-full'
           }  md:translate-x-0  transition duration-200 ease-in-out`}
       >
         <div className='flex flex-col h-full'>
@@ -75,7 +76,7 @@ const Sidebar = () => {
               {
                 role === 'Admin' && <MenuItem
                 icon={BsGraphUp}
-                label='Statistics'
+                label='Analytics'
                 address='/dashboard'
               />
               }

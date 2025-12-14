@@ -25,9 +25,9 @@ const Navbar = () => {
         <li className='text-lg'><NavLink to={'/dashboard'}>Dashboard</NavLink></li>
     </>
     return (
-        <div className='bg-[#324354]'>
+        <div className='bg-[#324354] relative z-50'>
         <Container>
-        <div className="navbar">
+        <div className="navbar ">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

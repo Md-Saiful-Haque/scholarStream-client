@@ -17,6 +17,7 @@ import AddScholarship from "../Pages/Dashboard/Admin/AddScholarship"
 import AllScholarship from "../Pages/AllScholarship";
 import ScholarshipDetails from "../Pages/ScholarshipDetails";
 import PaymentSuccess from "../Pages/Payment/PaymentSuccess";
+import Analytics from "../Pages/Dashboard/Common/Analytics";
 
 
 export const router = createBrowserRouter([
@@ -60,6 +61,12 @@ export const router = createBrowserRouter([
         path: '/dashboard',
         element: <DashboardLayout />,
         children: [
+            {
+                index: true,
+                element: <PrivateRoute>
+                    <Analytics />
+                </PrivateRoute>
+            },
             {
                 path: 'profile',
                 element: (
@@ -113,7 +120,7 @@ export const router = createBrowserRouter([
                 element: <PrivateRoute>
                     <MyApplications />
                 </PrivateRoute>
-            }
+            }         
         ]
     }
 ])
