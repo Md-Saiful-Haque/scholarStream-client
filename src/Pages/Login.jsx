@@ -5,9 +5,11 @@ import { Link, useLocation, useNavigate } from 'react-router';
 import { FaEye } from 'react-icons/fa';
 import { IoEyeOff } from 'react-icons/io5';
 import useAuth from '../hooks/useAuth';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 
 const Login = () => {
+    const axiosSecure = useAxiosSecure()
     const [show, setShow] = useState(false);
     const {signIn, setUser, setLoading, signWithGoogle} = useAuth()
     const navigate = useNavigate()
@@ -33,17 +35,30 @@ const Login = () => {
     }
 
     const handleGoogleSignIn = () => {
-            signWithGoogle()
-                .then(res => {
-                    setUser(res.user)
-                    toast.success('Register Successfully')
-                    setLoading(false)
-                    navigate(`${location.state ? location.state : '/'}`)
-                })
-                .catch(err => {
-                    toast(err.message)
-                })
-        }
+        signWithGoogle()
+            .then(res => {
+
+                const userInfo = {
+                    name: res.user.displayName,
+                    email: res.user.email,                 
+                    photoURL: res.user.photoURL
+                }
+
+                axiosSecure.post('/users', userInfo)
+                    .then(res => {
+                        console.log('user data has been stored', res.data)
+                        navigate(location.state || '/');
+                    })
+
+                setUser(res.user)
+                toast.success('Login Successfully')
+                setLoading(false)
+                navigate(`${location.state ? location.state : '/'}`)
+            })
+            .catch(err => {
+                toast(err.message)
+            })
+    }
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-[#c4e5f2] py-12 px-3 md:px-0">

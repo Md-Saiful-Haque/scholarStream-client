@@ -1,18 +1,21 @@
 import { useQuery } from "@tanstack/react-query"
 import ManageScholarshipDataRow from "../../../components/Dashboard/TableRows/ManageScholarshipDataRow"
 import useAxiosSecure from "../../../hooks/useAxiosSecure"
+import LoadingSpinner from "../../LoadingSpinner"
 
 
 const ManageScholarships = () => {
   const axiosSecure = useAxiosSecure()
 
-  const { data: scholarships = [], refetch } = useQuery({
+  const { data: scholarships = [], refetch, isLoading } = useQuery({
     queryKey: ['scholarship'],
     queryFn: async () => {
       const res = await axiosSecure.get('/manage-scholarship')
       return res.data
     }
   })
+
+  if(isLoading) return <LoadingSpinner />
 
   return (
     <>

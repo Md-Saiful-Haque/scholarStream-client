@@ -3,6 +3,7 @@ import React from 'react';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import LoadingSpinner from '../../LoadingSpinner';
 import { MdDeleteSweep } from 'react-icons/md';
+import Swal from 'sweetalert2';
 
 const AllReviews = () => {
   const axiosSecure = useAxiosSecure()
@@ -14,6 +15,32 @@ const AllReviews = () => {
       return res.data
     }
   })
+
+  const handleDeleteReview = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((res) => {
+      if (res.isConfirmed) {
+        axiosSecure.delete(`/delete-review/${id}`)
+          .then(res => {
+            if (res.data.deletedCount) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+              });
+            }
+            refetch()
+          })
+      }
+    })
+  }
 
   if (isLoading) return <LoadingSpinner />
 
@@ -95,11 +122,11 @@ const AllReviews = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span className="px-2 inline-flex text-sm text-wrap font-medium text-gray-600">
                       {review?.reviewComment}
-                    
+
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
-                    <button className="btn btn-error btn-md text-white">
+                    <button onClick={() => handleDeleteReview(review._id)} className="btn btn-error btn-md text-white">
                       <MdDeleteSweep /> Delete
                     </button>
                   </td>

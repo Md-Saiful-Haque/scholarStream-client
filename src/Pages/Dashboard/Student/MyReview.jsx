@@ -6,6 +6,7 @@ import LoadingSpinner from '../../LoadingSpinner';
 import { FaEdit } from 'react-icons/fa';
 import { MdDeleteSweep } from "react-icons/md";
 import MyReviewsEditModal from '../../../components/Modal/MyReviewsEditModal';
+import Swal from 'sweetalert2';
 
 const MyReview = () => {
   const { user } = useAuth()
@@ -19,6 +20,32 @@ const MyReview = () => {
       return res.data
     }
   })
+
+  const handleDeleteMyReview = (id) => {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((res) => {
+        if (res.isConfirmed) {
+          axiosSecure.delete(`/delete-myReview/${id}`)
+            .then(res => {
+              if (res.data.deletedCount) {
+                Swal.fire({
+                  title: "Deleted!",
+                  text: "Your file has been deleted.",
+                  icon: "success"
+                });
+              }
+              refetch()
+            })
+        }
+      })
+    }
 
   if (isLoading) return <LoadingSpinner />
 
@@ -77,27 +104,26 @@ const MyReview = () => {
               {
                 reviews.map(review => <tr key={review._id} className="hover:bg-indigo-50/50">
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-400">
-                    {review.scholarshipName}
+                    {review?.scholarshipName}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-indigo-400 font-semibold">
-                    {review.universityName}
+                    {review?.universityName}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-gray-400">{review.userName}</div>
-                    <div className="text-xs text-gray-400">{review.
-                      createdAt}</div>
+                    <div className="text-sm font-medium text-gray-400">{review?.userName}</div>
+                    <div className="text-xs text-gray-400">{review?.createdAt}</div>
                   </td>
                   <td className="px-6 py-4 text-wrap text-sm text-gray-600">
-                    {review.reviewComment}
+                    {review?.reviewComment}
                   </td>
                   <td className="px-6 py-4 text-md text-gray-500">
-                    {review.ratingPoint} Out of 5
+                    {review?.ratingPoint} Out of 5
                   </td>
                   <td className="px-6 py-4 flex gap-1.5">
                     <button onClick={() => setMyReviews(review)} className="btn btn-warning btn-sm">
                       <FaEdit /> Edit
                     </button>
-                    <button className="btn btn-error btn-sm">
+                    <button onClick={() => handleDeleteMyReview(review._id)} className="btn btn-error btn-sm text-white">
                       <MdDeleteSweep /> Delete
                     </button>
                   </td>

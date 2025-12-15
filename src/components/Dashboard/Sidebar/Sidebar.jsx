@@ -77,7 +77,7 @@ const Sidebar = () => {
                 role === 'Admin' && <MenuItem
                 icon={BsGraphUp}
                 label='Analytics'
-                address='/dashboard'
+                address='/dashboard/analytics'
               />
               }
               {/* Role-Based Menu */}

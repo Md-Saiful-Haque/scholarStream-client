@@ -168,7 +168,7 @@ const Register = () => {
                             required
                             className="mt-1 w-4 h-4 text-green-600 bg-gray-100 rounded border-gray-300 focus:ring-green-500"
                         />
-                        {/* Note: In React/JSX, 'for' attribute becomes 'htmlFor' */}
+                        
                         <label htmlFor="terms-checkbox" className="ml-2 text-sm font-light text-gray-700">
                             I agree to the
                             <a href="#" className="font-medium text-green-600 hover:text-green-700">Terms of Service</a>

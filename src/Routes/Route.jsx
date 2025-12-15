@@ -19,6 +19,8 @@ import ScholarshipDetails from "../Pages/ScholarshipDetails";
 import PaymentSuccess from "../Pages/Payment/PaymentSuccess";
 import Analytics from "../Pages/Dashboard/Common/Analytics";
 import PaymentFailed from "../Pages/Payment/PaymentFailed";
+import AdminRoute from "./AdminRoute";
+import ModeratorRoute from "./ModeratorRoute";
 
 
 export const router = createBrowserRouter([
@@ -67,9 +69,11 @@ export const router = createBrowserRouter([
         element: <DashboardLayout />,
         children: [
             {
-                index: true,
+                path: 'analytics',
                 element: <PrivateRoute>
-                    <Analytics />
+                    <AdminRoute>
+                        <Analytics />
+                    </AdminRoute>
                 </PrivateRoute>
             },
             {
@@ -84,34 +88,44 @@ export const router = createBrowserRouter([
                 path: 'manage-scholarships',
                 element: (
                     <PrivateRoute>
-                        <ManageScholarships />
+                        <AdminRoute>
+                            <ManageScholarships />
+                        </AdminRoute>
                     </PrivateRoute>
                 ),
             },
             {
                 path: 'add-scholarship',
                 element: <PrivateRoute>
-                    <AddScholarship />
+                    <AdminRoute>
+                        <AddScholarship />
+                    </AdminRoute>
                 </PrivateRoute>
             },
             {
                 path: 'manage-users',
                 element: (
                     <PrivateRoute>
-                        <ManageUsers />
+                        <AdminRoute>
+                            <ManageUsers />
+                        </AdminRoute>
                     </PrivateRoute>
                 ),
             },
             {
                 path: 'manage-application',
                 element: <PrivateRoute>
-                    <ManageApplications></ManageApplications>
+                    <ModeratorRoute>
+                        <ManageApplications></ManageApplications>
+                    </ModeratorRoute>
                 </PrivateRoute>
             },
             {
                 path: 'all-reviews',
                 element: <PrivateRoute>
-                    <AllReviews />
+                    <ModeratorRoute>
+                        <AllReviews />
+                    </ModeratorRoute>
                 </PrivateRoute>
             },
             {

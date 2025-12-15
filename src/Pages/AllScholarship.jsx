@@ -7,15 +7,16 @@ import LoadingSpinner from './LoadingSpinner';
 
 const AllScholarship = () => {
     const axiosSecure = useAxiosSecure()
-    const [inputText, setInputText] = useState(""); 
+    const [inputText, setInputText] = useState("");
     const [search, setSearch] = useState("");
+    const [country, setCountry] = useState("");
     const [page, setPage] = useState(1);
-    
+
 
     const { data, isLoading } = useQuery({
-        queryKey: ['scholarships', search, page],
+        queryKey: ['scholarships', search, country, page],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/scholarship?search=${search}&page=${page}`)
+            const res = await axiosSecure.get(`/scholarship?search=${search}&country=${country}&page=${page}`)
             return res.data
         }
     })
@@ -26,20 +27,40 @@ const AllScholarship = () => {
     const totalPages = Math.ceil(total / limit);
 
     const handleSearchClick = () => {
-        setSearch(inputText); 
+        setSearch(inputText);
         setPage(1)
     };
 
-    if(isLoading) return <LoadingSpinner />
+    if (isLoading) return <LoadingSpinner />
 
     return (
 
         <div className='pt-8 bg-[#c4e5f2] pb-10'>
             <Container>
                 <title></title>
-                <div className='flex justify-between items-center mb-10 max-w-[1200px] mx-auto pt-4'>
+                <div className='flex md:flex-row flex-col justify-between items-center mb-10 max-w-[1200px] mx-auto pt-4'>
                     <h2 className='font-bold text-3xl text-[#04264e]'>All Scholarship</h2>
-                    <div className='flex justify-center gap-2 items-center'>
+                    <div className='flex md:flex-row flex-col md:justify-center gap-2 items-center'>
+                        {/* COUNTRY FILTER */}
+                        <select
+                            value={country}
+                            onChange={(e) => {
+                                 setCountry(e.target.value);
+                                setPage(1);
+                            }}
+                            className="select select-bordered mt-5 md:mt-0"
+                        >
+                            <option value="">All Countries</option>
+                            <option value="Saudi Arabia">Saudi Arabia</option>
+                            <option value="United States">United States</option>
+                            <option value="United Kingdom">United Kingdom</option>
+                            <option value="Canada">Canada</option>
+                            <option value="Japan">Japan</option>
+                            <option value="Sweden">Sweden</option>
+                            <option value="Switzerland">Switzerland</option>
+                            <option value="South Africa">South Africa</option>
+                        </select>
+
                         <label className="input rounded-full">
                             <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                 <g
@@ -68,72 +89,73 @@ const AllScholarship = () => {
                         >
                             Search
                         </button>
+
                     </div>
                 </div>
-                <div className='max-w-[1200px] mx-auto grid grid-cols-3 gap-4'>
+                <div className='max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 p-3 md:p-0'>
                     {
                         scholarships.map(scholarship => <ScholarshipCard key={scholarship._id} scholarship={scholarship}></ScholarshipCard>)
                     }
                 </div>
 
                 {/* PAGINATION GRADIENT UI */}
-<div className="flex justify-center mt-10">
-    <div className="flex gap-2 items-center">
+                <div className="flex justify-center mt-10">
+                    <div className="flex gap-2 items-center">
 
-        {/* PREV BUTTON */}
-        <button
-            disabled={page === 1}
-            onClick={() => setPage(page - 1)}
-            className={`
+                        {/* PREV BUTTON */}
+                        <button
+                            disabled={page === 1}
+                            onClick={() => setPage(page - 1)}
+                            className={`
                 px-5 py-2 rounded-xl text-white font-medium
                 transition-all duration-300
-                ${page === 1 
-                    ? "bg-gray-300 cursor-not-allowed" 
-                    : "bg-linear-to-r from-blue-600 to-blue-800 hover:opacity-90 shadow-md"}
+                ${page === 1
+                                    ? "bg-gray-300 cursor-not-allowed"
+                                    : "bg-linear-to-r from-blue-600 to-blue-800 hover:opacity-90 shadow-md"}
             `}
-        >
-            « Prev
-        </button>
+                        >
+                            « Prev
+                        </button>
 
-        {/* PAGE NUMBERS */}
-        <div className="flex gap-2">
-            {[...Array(totalPages)].map((_, idx) => {
-                const isActive = page === idx + 1;
-                return (
-                    <button
-                        key={idx}
-                        onClick={() => setPage(idx + 1)}
-                        className={`
+                        {/* PAGE NUMBERS */}
+                        <div className="flex gap-2">
+                            {[...Array(totalPages)].map((_, idx) => {
+                                const isActive = page === idx + 1;
+                                return (
+                                    <button
+                                        key={idx}
+                                        onClick={() => setPage(idx + 1)}
+                                        className={`
                             w-10 h-10 flex items-center justify-center rounded-xl font-semibold
                             transition-all duration-300
                             ${isActive
-                                ? "bg-linear-to-r from-blue-600 to-blue-800 text-white shadow-lg scale-105"
-                                : "bg-white text-blue-700 border border-blue-300 hover:bg-blue-700 hover:text-white"}
+                                                ? "bg-linear-to-r from-blue-600 to-blue-800 text-white shadow-lg scale-105"
+                                                : "bg-white text-blue-700 border border-blue-300 hover:bg-blue-700 hover:text-white"}
                         `}
-                    >
-                        {idx + 1}
-                    </button>
-                );
-            })}
-        </div>
+                                    >
+                                        {idx + 1}
+                                    </button>
+                                );
+                            })}
+                        </div>
 
-        {/* NEXT BUTTON */}
-        <button
-            disabled={page === totalPages}
-            onClick={() => setPage(page + 1)}
-            className={`
+                        {/* NEXT BUTTON */}
+                        <button
+                            disabled={page === totalPages}
+                            onClick={() => setPage(page + 1)}
+                            className={`
                 px-5 py-2 rounded-xl text-white font-medium
                 transition-all duration-300
                 ${page === totalPages
-                    ? "bg-gray-300 cursor-not-allowed"
-                    : "bg-linear-to-r from-blue-600 to-blue-800 hover:opacity-90 shadow-md"}
+                                    ? "bg-gray-300 cursor-not-allowed"
+                                    : "bg-linear-to-r from-blue-600 to-blue-800 hover:opacity-90 shadow-md"}
             `}
-        >
-            Next »
-        </button>
+                        >
+                            Next »
+                        </button>
 
-    </div>
-</div>
+                    </div>
+                </div>
 
             </Container>
         </div>
