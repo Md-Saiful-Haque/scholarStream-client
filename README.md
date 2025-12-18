@@ -5,7 +5,7 @@ ScholarStream is a full-stack **MERN** application designed to connect students 
 ---
 
 ## 🌐 Live Website
-🔗 **Live Link:** https://your-live-site-url.com  
+🔗 **Live Link:** https://scholar-stream-da98b.web.app  
 
 ---
 
