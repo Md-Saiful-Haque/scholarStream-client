@@ -3,10 +3,11 @@ import { useForm } from "react-hook-form"
 import useAuth from "../../../hooks/useAuth"
 import useAxiosSecure from "../../../hooks/useAxiosSecure"
 import Swal from "sweetalert2"
+import LoadingSpinner from "../../../Pages/LoadingSpinner"
 
 
 const ManageScholarshipDataRow = ({ scholarship, refetch }) => {
-  const { user } = useAuth()
+  const { user, loading } = useAuth()
   const modalRef = useRef()
   const [scholarShip, setScholarShip] = useState([])
   const [defaultValue, setDefaultValue] = useState({})
@@ -78,6 +79,8 @@ const ManageScholarshipDataRow = ({ scholarship, refetch }) => {
       }
     })
   }
+
+  if(loading) return <LoadingSpinner />
 
   return (
     <tr>
