@@ -1,9 +1,7 @@
-// src/components/ContactUsSection.jsx
 import React from 'react';
 import { motion } from "motion/react"
 import { toast } from 'react-toastify';
-// Icons (You would need to install a library like 'react-icons' for these)
-// Example: import { Mail, Phone, MapPin } from 'lucide-react'; 
+
 
 const containerVariants = {
   hidden: {},
@@ -20,7 +18,7 @@ const itemVariants = {
 };
 
 const ContactUsSection = () => {
-  // Simple form submission handler (replace with actual API/service integration)
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     toast.success("Thank you for your message! We will get back to you soon.");
@@ -71,7 +69,7 @@ const ContactUsSection = () => {
             >
               <motion.div className="flex items-start space-x-3" variants={itemVariants}>
                 <span className=" pt-1 text-indigo-500">
-                  {/* <Mail className="h-6 w-6" /> */} 
+                  
                   {/* Placeholder icon */} 📧
                 </span>
                 <div>
@@ -82,7 +80,7 @@ const ContactUsSection = () => {
               
               <motion.div className="flex items-start space-x-3" variants={itemVariants}>
                 <span className="pt-1 text-indigo-500">
-                  {/* <Phone className="h-6 w-6" /> */}
+                  
                   {/* Placeholder icon */} 📞
                 </span>
                 <div>
@@ -93,7 +91,7 @@ const ContactUsSection = () => {
               
               <motion.div className="flex items-start space-x-3" variants={itemVariants}>
                 <span className=" pt-1 text-indigo-500">
-                  {/* <MapPin className="h-6 w-6" /> */}
+                  
                   {/* Placeholder icon */} 📍
                 </span>
                 <div>

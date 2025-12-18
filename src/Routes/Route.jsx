@@ -21,12 +21,14 @@ import Analytics from "../Pages/Dashboard/Common/Analytics";
 import PaymentFailed from "../Pages/Payment/PaymentFailed";
 import AdminRoute from "./AdminRoute";
 import ModeratorRoute from "./ModeratorRoute";
+import ErrorPage from "../Pages/ErrorPage";
 
 
 export const router = createBrowserRouter([
     {
         path: '/',
         element: <MainLayouts />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
@@ -53,6 +55,7 @@ export const router = createBrowserRouter([
     {
         path: '/auth',
         element: <AuthLayouts />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: '/auth/login',
@@ -67,6 +70,7 @@ export const router = createBrowserRouter([
     {
         path: '/dashboard',
         element: <DashboardLayout />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: 'analytics',

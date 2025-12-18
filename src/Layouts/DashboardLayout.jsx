@@ -7,7 +7,9 @@ const DashboardLayout = () => {
   return (
 
     <>
+    <title>scholarStream Dashboard</title>
     <div className='relative min-h-screen md:flex bg-white'>
+      
       {/* Left Side: Sidebar Component */}
       <Sidebar />
       {/* Right Side: Dashboard Dynamic Content */}

@@ -1,4 +1,3 @@
-//import { useQuery } from '@tanstack/react-query'
 import { useQuery } from '@tanstack/react-query'
 import UserDataRow from '../../../components/Dashboard/TableRows/UserDataRow'
 import useAxiosSecure from '../../../hooks/useAxiosSecure'

@@ -1,13 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
 
-// You will need react-router-dom for navigation
 
 const SearchScholarshipButton = () => {
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    // Navigate to the All Scholarships page as required
     navigate('/all-scholarships'); 
   };
 

@@ -65,6 +65,7 @@ const Sidebar = () => {
               <Link to='/'>
                 <img src={logo} alt='logo' width='50' height='50' />
               </Link>
+              <Link to={'/'}><h2 className='text-[#c4e5f2] font-bold text-2xl'>ScholarStream</h2></Link>
             </div>
           </div>
 

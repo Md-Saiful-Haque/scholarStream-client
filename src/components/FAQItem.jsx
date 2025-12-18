@@ -1,7 +1,6 @@
-// src/components/FAQItem.jsx
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { FiChevronDown } from 'react-icons/fi'; // The easy-to-use chevron icon
+import { FiChevronDown } from 'react-icons/fi'; 
 
 const FAQItem = ({ question, answer, delay }) => {
   const [isOpen, setIsOpen] = useState(false);

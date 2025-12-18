@@ -1,11 +1,10 @@
-
 import { useEffect, useRef, useState } from "react"
 import { useForm } from "react-hook-form"
 import useAuth from "../../../hooks/useAuth"
 import useAxiosSecure from "../../../hooks/useAxiosSecure"
 import Swal from "sweetalert2"
 
-//import DeleteModal from '../../Modal/DeleteModal'
+
 const ManageScholarshipDataRow = ({ scholarship, refetch }) => {
   const { user } = useAuth()
   const modalRef = useRef()
@@ -39,7 +38,6 @@ const ManageScholarshipDataRow = ({ scholarship, refetch }) => {
   }
 
   const handleUpdateScholarship = (data) => {
-    console.log(data)
     axiosSecure.put(`/update-scholarship/${defaultValue._id}`, data)
       .then(res => {
         refetch()
@@ -115,7 +113,6 @@ const ManageScholarshipDataRow = ({ scholarship, refetch }) => {
 
       <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm flex gap-2'>
         <button
-          //onClick={() => setIsOpen(true)}
           onClick={() => handleUpdate(scholarship._id)}
           className='relative disabled:cursor-not-allowed cursor-pointer inline-block px-3 py-1 font-semibold text-lime-900 leading-tight'
         >
@@ -123,7 +120,6 @@ const ManageScholarshipDataRow = ({ scholarship, refetch }) => {
           <span className='relative cursor-pointer'>Update</span>
         </button>
         <button
-          //onClick={() => setIsOpen(true)}
           onClick={() => handleDelete(_id)}
           className='relative disabled:cursor-not-allowed cursor-pointer inline-block px-3 py-1 font-semibold text-lime-900 leading-tight'
         >
@@ -385,14 +381,12 @@ const ManageScholarshipDataRow = ({ scholarship, refetch }) => {
 
             <div className="modal-action">
               <form method="dialog">
-                {/* if there is a button in form, it will close the modal */}
+                
                 <button className="btn">Close</button>
               </form>
             </div>
           </div>
         </dialog>
-
-        {/* <DeleteModal isOpen={isOpen} closeModal={closeModal} order={order} refetch={refetch} /> */}
       </td>
     </tr>
   )

@@ -78,18 +78,20 @@ const ScholarshipCard = ({ scholarship }) => {
                     </span>
                 </div>
 
-                {/* Buttons (No functionality) */}
+                {/* Buttons */}
                 <div className="mt-auto flex gap-3">
+                    <Link to={`/scholarship/${_id}`} className='w-1/2'>
                         <button
                             type="button"
                             className="w-full border border-indigo-200 text-indigo-600 rounded-lg py-2 text-sm font-medium hover:bg-indigo-50 transition"
                         >
-                           <Link to={`/scholarship/${_id}`}> View Details</Link>
+                            View Details
                         </button>
+                    </Link>    
                 
                         <button
                             type="button"
-                            className="w-full bg-[#04264e] text-white rounded-lg py-2 text-sm font-semibold transition"
+                            className="w-1/2 bg-[#04264e] text-white rounded-lg py-2 text-sm font-semibold transition"
                         >
                             Apply
                         </button>

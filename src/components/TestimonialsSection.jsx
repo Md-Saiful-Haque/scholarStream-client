@@ -1,4 +1,3 @@
-// src/components/TestimonialsSection.jsx
 import React from 'react';
 import TestimonialCard from './TestimonialCard';
 import { motion } from "motion/react"
@@ -25,7 +24,7 @@ const testimonialsData = [
 const sectionVariants = {
   animate: {
     transition: {
-      staggerChildren: 0.2, // Stagger the animation of the children cards
+      staggerChildren: 0.2, 
     },
   },
 };
@@ -58,7 +57,7 @@ const TestimonialsSection = () => {
         <motion.div
           className="grid grid-cols-1 gap-8 md:grid-cols-3"
           variants={sectionVariants}
-          initial="initial" // Defined on child, but needed for context
+          initial="initial" 
           whileInView="animate"
           viewport={{ once: true, amount: 0.3 }}
         >
@@ -66,7 +65,7 @@ const TestimonialsSection = () => {
             <TestimonialCard
               key={index}
               {...testimonial}
-              delay={0.2 * index} // Dynamic delay for staggered effect
+              delay={0.2 * index} 
             />
           ))}
         </motion.div>

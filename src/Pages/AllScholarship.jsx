@@ -10,13 +10,14 @@ const AllScholarship = () => {
     const [inputText, setInputText] = useState("");
     const [search, setSearch] = useState("");
     const [country, setCountry] = useState("");
+    const [sort, setSort] = useState("");
     const [page, setPage] = useState(1);
 
 
     const { data, isLoading } = useQuery({
-        queryKey: ['scholarships', search, country, page],
+        queryKey: ['scholarships', search, country, sort, page],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/scholarship?search=${search}&country=${country}&page=${page}`)
+            const res = await axiosSecure.get(`/scholarship?search=${search}&country=${country}&sort=${sort}&page=${page}`)
             return res.data
         }
     })
@@ -34,18 +35,18 @@ const AllScholarship = () => {
     if (isLoading) return <LoadingSpinner />
 
     return (
-
         <div className='pt-8 bg-[#c4e5f2] pb-10'>
+            <title>scholarStream AllScholarship</title>
             <Container>
                 <title></title>
                 <div className='flex md:flex-row flex-col justify-between items-center mb-10 max-w-[1200px] mx-auto pt-4'>
                     <h2 className='font-bold text-3xl text-[#04264e]'>All Scholarship</h2>
-                    <div className='flex md:flex-row flex-col md:justify-center gap-2 items-center'>
+                    <div className='flex md:flex-row flex-col justify-center gap-2 items-center'>
                         {/* COUNTRY FILTER */}
                         <select
                             value={country}
                             onChange={(e) => {
-                                 setCountry(e.target.value);
+                                setCountry(e.target.value);
                                 setPage(1);
                             }}
                             className="select select-bordered mt-5 md:mt-0"
@@ -59,6 +60,23 @@ const AllScholarship = () => {
                             <option value="Sweden">Sweden</option>
                             <option value="Switzerland">Switzerland</option>
                             <option value="South Africa">South Africa</option>
+                            <option value="Brazil">Brazil</option>
+                            <option value="China">China</option>
+                        </select>
+
+                        {/* SORT DROPDOWN */}
+                        <select
+                            value={sort}
+                            onChange={(e) => {
+                                setSort(e.target.value);
+                                setPage(1);
+                            }}
+                            className="select select-bordered mt-5 md:mt-0"
+                        >
+                            <option value="">Sort By</option>
+                            <option value="fees_desc">Fees: High → Low</option>
+                            <option value="fees_asc">Fees: Low → High</option>
+                            <option value="date_desc">Latest Scholarships</option>
                         </select>
 
                         <label className="input rounded-full">

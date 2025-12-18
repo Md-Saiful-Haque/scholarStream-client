@@ -1,10 +1,9 @@
-// src/components/FAQSection.jsx
 import React from 'react';
 import { motion } from "motion/react"
 import FAQItem from './FAQItem';
 import Container from './Container';
 
-// Data for the F.A.Q. items
+
 const faqData = [
   {
     question: "How often is the scholarship list updated?",
@@ -59,7 +58,7 @@ const FAQSection = () => {
                 key={index}
                 question={item.question}
                 answer={item.answer}
-                delay={0.1 * index} // Staggered entry animation
+                delay={0.1 * index} 
               />
             ))}
           </div>

@@ -9,15 +9,15 @@ const ApplicationDetailsModal = ({ application, onClose }) => {
           Application Details
         </h3>
 
-        <h2 className='text-lg'> <strong>Name:</strong> {application.userName}</h2>
-        <h2 className='text-lg'> <strong>Email:</strong> {application.userEmail}</h2>
-        <h2 className='text-lg'> <strong>University:</strong> {application.universityName}</h2>
-        <h2 className='text-lg'> <strong>Scholarship:</strong> {application.scholarshipName}</h2>
-        <h2 className='text-lg'> <strong>Category:</strong> {application.scholarshipCategory}</h2>
-        <h2 className='text-lg'> <strong>Degree:</strong> {application.degree}</h2>
-        <h2 className='text-lg'> <strong>Status:</strong> {application.applicationStatus}</h2>
-        <h2 className='text-lg'> <strong>Payment:</strong> {application.paymentStatus}</h2>
-        <h2 className='text-lg'> <strong>Feedback:</strong> {application.feedback || "-"}</h2>
+        <h2 className='text-lg'> <strong>Name:</strong> {application?.userName}</h2>
+        <h2 className='text-lg'> <strong>Email:</strong> {application?.userEmail}</h2>
+        <h2 className='text-lg'> <strong>University:</strong> {application?.universityName}</h2>
+        <h2 className='text-lg'> <strong>Scholarship:</strong> {application?.scholarshipName}</h2>
+        <h2 className='text-lg'> <strong>Category:</strong> {application?.scholarshipCategory}</h2>
+        <h2 className='text-lg'> <strong>Degree:</strong> {application?.degree}</h2>
+        <h2 className='text-lg'> <strong>Status:</strong> {application?.applicationStatus}</h2>
+        <h2 className='text-lg'> <strong>Payment:</strong> {application?.paymentStatus}</h2>
+        <h2 className='text-lg'> <strong>Feedback:</strong> {application?.feedback || "-"}</h2>
 
         <div className="modal-action">
           <button

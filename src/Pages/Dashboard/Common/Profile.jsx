@@ -1,4 +1,4 @@
-import coverImg from '../../../assets/cover.jpg'
+import coverImg from '../../../assets/cover2.jpg'
 import useAuth from '../../../hooks/useAuth'
 import useRole from '../../../hooks/useRole'
 import LoadingSpinner from '../../LoadingSpinner'

@@ -99,7 +99,7 @@ const MyReview = () => {
                 </th>
               </tr>
             </thead>
-            {/* The tbody is left empty here, as data mapping is excluded */}
+            
             <tbody className="bg-white divide-y divide-gray-200">
               {
                 reviews.map(review => <tr key={review._id} className="hover:bg-indigo-50/50">

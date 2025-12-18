@@ -8,8 +8,14 @@ const AddReviewModal = ({ app, onClose }) => {
     const axiosSecure = useAxiosSecure()
     const [rating, setRating] = useState(5);
     const [comment, setComment] = useState("");
-    
+
+
+
     const handleSubmitReview = async () => {
+        if (rating > 5) {
+            alert('The rating cannot exceed 5')
+            return
+        }
         const reviewInfo = {
             scholarshipId: app?.scholarshipId,
             scholarshipName: app?.scholarshipName,
@@ -17,7 +23,7 @@ const AddReviewModal = ({ app, onClose }) => {
             userName: app?.userName,
             userEmail: app?.userEmail,
             userImage: user?.photoURL,
-            ratingPoint: rating,
+            ratingPoint: Number(rating),
             reviewComment: comment,
         }
 

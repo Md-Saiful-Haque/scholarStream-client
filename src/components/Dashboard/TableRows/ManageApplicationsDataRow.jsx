@@ -12,7 +12,7 @@ const ManageApplicationsDataRow = ({ application, refetch }) => {
   const [applications, setApplications] = useState(null)
   const [feedbackId, setFeedbackId] = useState(null)
 
-  const { userName, userEmail, universityName, applicationStatus, paymentStatus, feedback } = application
+  const { userName, userEmail, universityName, applicationStatus, paymentStatus, feedback } = application || {}
 
   const handleChangeStatus = async (id, updatedStatus) => {
     const res = await axiosSecure.patch(`/update-status/${id}`, { status: updatedStatus })
@@ -60,6 +60,7 @@ const ManageApplicationsDataRow = ({ application, refetch }) => {
           <select
             //value={statusUpdate}
             onChange={(e) => handleChangeStatus(application._id, e.target.value)}
+            defaultValue={applicationStatus}
             required
             className='p-1 border-2 border-[#04264e] focus:outline-[#04264e] rounded-md text-gray-900  bg-white'
             name='category'

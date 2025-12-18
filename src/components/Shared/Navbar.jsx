@@ -23,8 +23,8 @@ const Navbar = () => {
     }
 
     const links = <>
-        <li className='text-lg'><NavLink to={'/'}>Home</NavLink></li>
-        <li className='text-lg'><NavLink to={'/all-scholarships'}>All Scholarships</NavLink></li>
+        <li className='text-lg'><NavLink to={'/'} style={({ isActive }) => ({ color: isActive && '#c4e5f2' })}>Home</NavLink></li>
+        <li className='text-lg'><NavLink to={'/all-scholarships'} style={({ isActive }) => ({ color: isActive && '#c4e5f2' })}>All Scholarships</NavLink></li>
     </>
     return (
         <div className='bg-[#324354] relative z-50'>
@@ -37,7 +37,7 @@ const Navbar = () => {
                     </div>
                     <ul
                         tabIndex="-1"
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                        className="menu menu-sm dropdown-content shadow bg-base-100  rounded-box z-1 mt-3 w-52 p-2">
                         {links}
                     </ul>
                 </div>
