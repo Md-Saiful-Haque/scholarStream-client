@@ -105,20 +105,20 @@ const ContactUsSection = () => {
           {/* Contact Form (Right Side) */}
           <div className="mt-12 lg:mt-0">
             <motion.form
-              className="p-8 bg-gray-50 rounded-xl shadow-xl"
+              className="p-8 bg-gray-50 dark:bg-[#1e293b] dark:text-white rounded-xl shadow-xl"
               onSubmit={handleSubmit}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.1 }}
               variants={containerVariants}
             >
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Send Us a Message</h3>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Send Us a Message</h3>
               
               <motion.div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8" variants={containerVariants}>
                 
                 {/* Name */}
                 <motion.div className="sm:col-span-1" variants={itemVariants}>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">Full Name</label>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Full Name</label>
                   <input
                     type="text"
                     name="name"
@@ -131,7 +131,7 @@ const ContactUsSection = () => {
 
                 {/* Email */}
                 <motion.div className="sm:col-span-1" variants={itemVariants}>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email Address</label>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Email Address</label>
                   <input
                     id="email"
                     name="email"
@@ -144,7 +144,7 @@ const ContactUsSection = () => {
                 
                 {/* Subject */}
                 <motion.div className="sm:col-span-2" variants={itemVariants}>
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700">Subject</label>
+                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Subject</label>
                   <input
                     type="text"
                     name="subject"
@@ -156,7 +156,7 @@ const ContactUsSection = () => {
 
                 {/* Message */}
                 <motion.div className="sm:col-span-2" variants={itemVariants}>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Message</label>
                   <textarea
                     id="message"
                     name="message"
