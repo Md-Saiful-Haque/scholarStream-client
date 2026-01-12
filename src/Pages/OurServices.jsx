@@ -41,10 +41,10 @@ const OurServices = () => {
     <section className= "py-28">
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto px-4 mb-20">
-        <motion.h1 className="text-4xl font-bold text-[#04264e] mb-6">
+        <motion.h1 className="text-4xl font-bold text-[#04264e] dark:text-white mb-6">
           Our Services
         </motion.h1>
-        <motion.p className="text-lg text-gray-700">
+        <motion.p className="text-lg text-gray-700 dark:text-gray-300">
           ScholarStream provides a complete scholarship management solution to
           help students, moderators, and administrators work seamlessly.
         </motion.p>
@@ -55,13 +55,13 @@ const OurServices = () => {
         {services.map((service, index) => (
           <motion.div
             key={index}
-            className="bg-white rounded-2xl p-10 shadow-md hover:shadow-xl transition"
+            className="bg-white dark:bg-[#1e293b] rounded-2xl p-10 shadow-md hover:shadow-xl transition"
           >
             <div className="text-5xl mb-6">{service.icon}</div>
-            <h3 className="text-2xl font-bold text-[#04264e] mb-4">
+            <h3 className="text-2xl dark:text-white font-bold text-[#04264e] mb-4">
               {service.title}
             </h3>
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
               {service.desc}
             </p>
           </motion.div>
