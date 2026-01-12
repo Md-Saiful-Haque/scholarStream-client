@@ -31,8 +31,8 @@ const sectionVariants = {
 
 const TestimonialsSection = () => {
   return (
-    <section className="py-16 sm:py-24 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 sm:py-24 bg-gray-50 dark:bg-[#0f172a]">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <motion.h2
             className="text-base font-semibold text-indigo-600 tracking-wide uppercase"
@@ -44,7 +44,7 @@ const TestimonialsSection = () => {
             Success Stories
           </motion.h2>
           <motion.p
-            className="mt-2 text-3xl font-extrabold text-[#04264e] sm:text-4xl"
+            className="mt-2 text-4xl font-bold text-[#04264e] dark:text-white sm:text-4xl"
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

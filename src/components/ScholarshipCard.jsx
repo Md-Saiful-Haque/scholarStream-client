@@ -18,7 +18,7 @@ const ScholarshipCard = ({ scholarship }) => {
     } = scholarship;
 
     return (
-        <div className="bg-white rounded-2xl shadow hover:shadow-lg transition duration-300 overflow-hidden flex flex-col">
+        <div className="bg-white dark:bg-[#1e293b] rounded-2xl shadow hover:shadow-lg transition duration-300 overflow-hidden flex flex-col">
             {/* University Image */}
             <div className="relative h-48 w-full">
                 <img
@@ -38,7 +38,7 @@ const ScholarshipCard = ({ scholarship }) => {
                 </div>
 
                 {/* Rank */}
-                <div className="absolute top-3 right-3 bg-white/90 px-3 py-1 rounded-xl text-xs font-medium">
+                <div className="absolute top-3 right-3 bg-white/90 dark:text-gray-700 px-3 py-1 rounded-xl text-xs font-medium">
                     Rank #{worldRank || "N/A"}
                 </div>
             </div>
@@ -46,10 +46,10 @@ const ScholarshipCard = ({ scholarship }) => {
             {/* Content */}
             <div className="p-4 flex flex-col gap-3 flex-1">
                 <div>
-                    <h3 className="text-lg font-semibold text-gray-900 line-clamp-2">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2">
                         {scholarshipName}
                     </h3>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-500 dark:text-gray-300">
                         {universityName} • {city}, {country}
                     </p>
                 </div>
@@ -58,13 +58,13 @@ const ScholarshipCard = ({ scholarship }) => {
                 <div className="flex items-center justify-between text-sm">
                     <div>
                         <p className="text-gray-500">Application Fee</p>
-                        <p className="font-bold text-gray-900">
+                        <p className="font-bold text-gray-900 dark:text-white">
                             {applicationFees ? `$${applicationFees}` : "Free"}
                         </p>
                     </div>
 
                     <div className="text-right">
-                        <p className="text-emerald-600 font-semibold">
+                        <p className="text-emerald-600 dark:text-gray-300 font-semibold">
                             {deadline}
                         </p>
                         <p className="text-xs text-gray-500">Deadline</p>
@@ -73,7 +73,7 @@ const ScholarshipCard = ({ scholarship }) => {
 
                 {/* Subject */}
                 <div>
-                    <span className="text-xs px-3 py-1 bg-gray-100 rounded-full">
+                    <span className="text-xs px-3 py-1 bg-gray-100 dark:bg-white/90 dark:text-gray-700 rounded-full">
                         {subjectCategory || "General"}
                     </span>
                 </div>
@@ -91,7 +91,7 @@ const ScholarshipCard = ({ scholarship }) => {
                 
                         <button
                             type="button"
-                            className="w-1/2 bg-[#04264e] text-white rounded-lg py-2 text-sm font-semibold transition"
+                            className="w-1/2 bg-[#04264e] dark:bg-[#0f172a] text-white rounded-lg py-2 text-sm font-semibold transition"
                         >
                             Apply
                         </button>

@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router'
 import Sidebar from '../components/Dashboard/Sidebar/Sidebar'
-import Navbar from '../components/Shared/Navbar'
-import Footer from '../components/Shared/Footer'
+// import Navbar from '../components/Shared/Navbar'
+// import Footer from '../components/Shared/Footer'
 
 const DashboardLayout = () => {
   return (

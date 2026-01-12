@@ -4,15 +4,14 @@ import { FaEnvelope, FaFacebookSquare, FaInstagramSquare, FaMapMarkerAlt, FaPhon
 import { Link } from 'react-router';
 import { FaSquareXTwitter } from 'react-icons/fa6';
 import { IoLogoYoutube } from 'react-icons/io5';
-import Container from '../Container';
+//import Container from '../Container';
 
 
 const Footer = () => {
 
     return (
-        <div className='bg-[#324354]'>
-            <Container>
-            <div className='flex flex-col md:flex-row justify-between items-center pt-5 pl-2.5'>
+        <div className='bg-[#324354] dark:bg-[#182135]'>
+            <div className='max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center pt-5 pl-2.5'>
                 <div className='md:w-1/3'>
                     <div className='flex items-center'>
                         <img src={logo} alt="" className='w-20 h-20' />
@@ -44,11 +43,11 @@ const Footer = () => {
                 </div>
                 <div className='flex flex-col list-none mr-70 md:mr-0 mb-3 md:mb-0 gap-4 mt-4 md:mt-0'>
                     <h2 className='text-2xl text-white font-semibold'>Explore</h2>
-                    <li><Link className='text-[#b3c5b5]'>New Projects</Link></li>
-                    <li><Link className='text-[#b3c5b5]'>Our services</Link></li>
-                    <li><Link className='text-[#b3c5b5]'>About Us</Link></li>
-                    <li><Link className='text-[#b3c5b5]'>Get In Touch</Link></li>
-                    <li><Link className='text-[#b3c5b5]'>Students</Link></li>
+                    <li><Link to={'/blog'} className='text-[#b3c5b5]'>Blog</Link></li>
+                    <li><Link to={'/service'} className='text-[#b3c5b5]'>Our services</Link></li>
+                    <li><Link to={'/about'} className='text-[#b3c5b5]'>About Us</Link></li>
+                    <li><Link to={'/'} className='text-[#b3c5b5]'>Get In Touch</Link></li>
+                    <li><Link to={'/'} className='text-[#b3c5b5]'>Students</Link></li>
                 </div>
                 <div>
                     <h2 className='text-2xl text-white font-semibold'>Newletter</h2>
@@ -63,19 +62,18 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-            </Container>
             <div className='bg-[#324354]'>
-                <Container>
-                <div className='flex justify-between items-center mt-10'>
+                
+                <div className='max-w-[1200px] mx-auto flex justify-between items-center mt-10'>
                     <p className='text-[#ffffff] mt-8 font-semibold mb-8 p-0.5 md:p-0'>© Copyright 2025 by ScholarStream</p>
                     <div className='flex items-center gap-8 text-white p-2 md:p-0'>
-                        <FaSquareXTwitter />
-                        <FaFacebookSquare />
-                        <FaInstagramSquare />
-                        <IoLogoYoutube />
+                        <Link to={'https://x.com/'}><FaSquareXTwitter /></Link>
+                        <Link to={'https://www.facebook.com/'}><FaFacebookSquare /></Link>
+                        <Link to={'https://www.youtube.com/'}><FaInstagramSquare /></Link>
+                        <Link to={'https://www.instagram.com/'}><IoLogoYoutube /></Link>
                     </div>
                 </div>
-                </Container>
+                
             </div>
         </div>
     );

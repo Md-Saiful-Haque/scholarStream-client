@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import coverImg from '../../../assets/cover2.jpg'
 import useAuth from '../../../hooks/useAuth'
 import useRole from '../../../hooks/useRole'
@@ -46,10 +47,12 @@ const Profile = () => {
                 </p>
 
                 <div>
-                  <button className='bg-[#04264e]  px-10 py-1 rounded-lg text-white cursor-pointer block mb-1'>
+                  <Link to={'/edit-profile'}>
+                  <button className='bg-[#04264e]  px-10 py-1.5 rounded-lg text-white cursor-pointer block mb-1'>
                     Update Profile
                   </button>
-                  <button className='bg-[#04264e] px-7 py-1 rounded-lg text-white cursor-pointer'>
+                  </Link>
+                  <button className='bg-[#04264e] px-7 py-1.5 rounded-lg text-white cursor-pointer'>
                     Change Password
                   </button>
                 </div>

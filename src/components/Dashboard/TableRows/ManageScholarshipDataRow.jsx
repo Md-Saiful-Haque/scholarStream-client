@@ -114,7 +114,7 @@ const ManageScholarshipDataRow = ({ scholarship, refetch }) => {
         <p className='text-gray-900'>{degree}</p>
       </td>
 
-      <td className='px-5 py-5 border-b border-gray-200 bg-white text-sm flex gap-2'>
+      <td className='px-5 py-8 border-b border-gray-200 bg-white text-sm flex gap-2'>
         <button
           onClick={() => handleUpdate(scholarship._id)}
           className='relative disabled:cursor-not-allowed cursor-pointer inline-block px-3 py-1 font-semibold text-lime-900 leading-tight'

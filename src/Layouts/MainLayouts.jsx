@@ -5,8 +5,10 @@ import Footer from '../components/Shared/Footer';
 
 const MainLayouts = () => {
     return (
-        <div>
-            <Navbar />
+        <div className='relative'>
+            <header className='sticky top-0 z-50'>
+                <Navbar />
+            </header>
             <div className='min-h-[calc(100vh-68px)]'>
                 <Outlet />
             </div>

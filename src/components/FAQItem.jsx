@@ -17,7 +17,7 @@ const FAQItem = ({ question, answer, delay }) => {
       transition={{ duration: 0.5, delay: delay }}
     >
       <button
-        className="flex justify-between items-center w-full py-4 text-left text-lg font-medium text-gray-900 focus:outline-none"
+        className="flex justify-between items-center w-full py-4 text-left text-lg font-medium text-gray-900 dark:text-white focus:outline-none"
         onClick={toggleOpen}
       >
         <span>{question}</span>
@@ -40,7 +40,7 @@ const FAQItem = ({ question, answer, delay }) => {
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <p className="pb-4 text-gray-600 pr-8">{answer}</p>
+            <p className="pb-4 text-gray-600 dark:text-gray-300 pr-8">{answer}</p>
           </motion.div>
         )}
       </AnimatePresence>

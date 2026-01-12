@@ -22,6 +22,10 @@ import PaymentFailed from "../Pages/Payment/PaymentFailed";
 import AdminRoute from "./AdminRoute";
 import ModeratorRoute from "./ModeratorRoute";
 import ErrorPage from "../Pages/ErrorPage";
+import About from "../Pages/About";
+import Blog from "../Pages/Blog";
+import EditProfile from "../Pages/EditProfile";
+import OurServices from "../Pages/OurServices";
 
 
 export const router = createBrowserRouter([
@@ -49,6 +53,22 @@ export const router = createBrowserRouter([
             {
                 path: '/payment-failed/:id',
                 element: <PaymentFailed />
+            },
+            {
+                path: '/about',
+                element: <About />
+            },
+            {
+                path: '/blog',
+                element: <Blog />
+            },
+            {
+                path: '/edit-profile',
+                element: <EditProfile />
+            },
+            {
+                path:'/service',
+                element: <OurServices />
             }
         ]
     },
@@ -73,6 +93,7 @@ export const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             {
+                //index: true,
                 path: 'analytics',
                 element: <PrivateRoute>
                     <AdminRoute>

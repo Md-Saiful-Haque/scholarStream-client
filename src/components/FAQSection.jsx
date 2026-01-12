@@ -25,9 +25,8 @@ const faqData = [
 
 const FAQSection = () => {
   return (
-    <section className="py-10 sm:py-24 bg-[#a4b7a6]">
-    <Container>    
-      <div className="px-4 sm:px-6 lg:px-8">
+    <section className="py-10 sm:py-24 bg-white dark:bg-[#0f172a]">    
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           {/* Title Animation */}
           <motion.h2
@@ -40,7 +39,7 @@ const FAQSection = () => {
             Need Answers?
           </motion.h2>
           <motion.p
-            className="mt-2 text-3xl font-extrabold text-[#04264e] sm:text-4xl"
+            className="mt-2 text-4xl font-bold text-[#04264e] dark:text-white sm:text-4xl"
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -52,7 +51,7 @@ const FAQSection = () => {
 
         {/* FAQ Container */}
         <div className="max-w-3xl mx-auto">
-          <div className="bg-white p-3 rounded-xl shadow-lg divide-y divide-gray-200">
+          <div className="bg-white dark:bg-[#1e293b] p-3 rounded-xl shadow-lg divide-y divide-gray-200">
             {faqData.map((item, index) => (
               <FAQItem
                 key={index}
@@ -64,7 +63,6 @@ const FAQSection = () => {
           </div>
         </div>
       </div>
-      </Container>
     </section>
   );
 };

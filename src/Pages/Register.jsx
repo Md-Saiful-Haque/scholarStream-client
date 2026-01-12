@@ -102,7 +102,7 @@ const Register = () => {
 
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-[#c4e5f2] py-12 px-3 md:px-0">
+        <div className="flex items-center justify-center min-h-screen py-12 px-3 md:px-0">
             <title>scholarStream-Register</title>
             {/* Form Card Container */}
             <div className="w-full max-w-md bg-white rounded-3xl p-8 shadow-2xl">
@@ -180,11 +180,11 @@ const Register = () => {
                     {/* Submit Button */}
                     <button
                         type="submit"
-                        className="w-full bg-[#04264e] text-white py-3 rounded-lg font-semibold text-lg  hover:text-white focus:outline-none transition duration-150"
+                        className="w-full bg-[#04264e] text-white py-3 rounded-lg font-semibold text-lg  hover:text-white focus:outline-none transition duration-150 cursor-pointer"
                     >
                         Create your account
                     </button>
-                    <p className='text-center my-5'>Already Have An Account ? <Link to={'/auth/login'} className='text-[#F75B5F]'>Login</Link></p>
+                    <p className='text-center my-5 dark:text-black'>Already Have An Account ? <Link to={'/auth/login'} className='text-[#F75B5F]'>Login</Link></p>
                 </form>
             </div>
         </div>
